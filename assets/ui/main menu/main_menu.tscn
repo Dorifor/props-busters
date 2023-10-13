@@ -1,13 +1,13 @@
 [gd_scene load_steps=27 format=3 uid="uid://bbua5yo0dvsfs"]
 
 [ext_resource type="Shader" path="res://assets/ui/shader/CRTshader.gdshader" id="1_6g2t5"]
-[ext_resource type="Script" path="res://assets/ui/main_menu/base_menu.gd" id="2_jf80g"]
+[ext_resource type="Script" path="res://assets/ui/main menu/base_menu.gd" id="2_jf80g"]
 [ext_resource type="Theme" uid="uid://rry0vxdb3l3k" path="res://assets/ui/styles/main_menu_theme.tres" id="3_8nyf7"]
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="3_cs8je"]
 [ext_resource type="FontFile" uid="uid://64n7qesgoljr" path="res://assets/fonts/Outfit-Black.ttf" id="4_lbp0i"]
-[ext_resource type="Script" path="res://assets/ui/main_menu/online.gd" id="5_8r2nd"]
+[ext_resource type="Script" path="res://assets/ui/main menu/online.gd" id="5_8r2nd"]
 [ext_resource type="PackedScene" uid="uid://cyflvex77ugkm" path="res://assets/main.tscn" id="6_jrsdt"]
-[ext_resource type="Script" path="res://assets/ui/main_menu/menu_camera.gd" id="8_s4yhq"]
+[ext_resource type="Script" path="res://assets/ui/main menu/menu_camera.gd" id="8_s4yhq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pmbes"]
 shader = ExtResource("1_6g2t5")
