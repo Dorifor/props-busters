@@ -720,5 +720,7 @@ skeleton = NodePath("")
 transform = Transform3D(0.579, 0, 0, 0, 0.579, 0, 0, 0, 0.579, -2.66496, 0.255914, 0)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://assets/player/hider/hider.tscn")
+_spawnable_scenes = PackedStringArray("res://assets/player/hider/hider.tscn", "res://assets/player/hunter.tscn")
 spawn_path = NodePath("..")
+
+[connection signal="server_disconnected" from="." to="." method="_on_server_disconnected"]
