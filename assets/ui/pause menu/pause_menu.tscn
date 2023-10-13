@@ -1,0 +1,118 @@
+[gd_scene load_steps=8 format=3 uid="uid://88yv727qgtc4"]
+
+[ext_resource type="Script" path="res://assets/ui/pause menu/pause_menu_manager.gd" id="1_dcvul"]
+[ext_resource type="Theme" uid="uid://dxs16nfa1bvuo" path="res://assets/ui/styles/basic_theme.tres" id="2_8kkx6"]
+[ext_resource type="StyleBox" uid="uid://cc1f4h78vi2h" path="res://assets/ui/styles/button_red.tres" id="3_2d45u"]
+[ext_resource type="StyleBox" uid="uid://b7m3eco1oujqm" path="res://assets/ui/styles/button_red_hover.tres" id="4_bp3vl"]
+[ext_resource type="StyleBox" uid="uid://cnt2xr5tgk1jd" path="res://assets/ui/styles/button_red_pressed.tres" id="5_sbqsf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf0e0"]
+bg_color = Color(0, 0, 0, 0.619608)
+
+[sub_resource type="LabelSettings" id="LabelSettings_butog"]
+font_size = 32
+
+[node name="Pause Menu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dcvul")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wf0e0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.5
+offset_top = -41.5
+offset_right = 50.5
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "PAUSE"
+label_settings = SubResource("LabelSettings_butog")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Horizontal Sensibility" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Horizontal Label" type="Label" parent="VBoxContainer/Horizontal Sensibility"]
+layout_mode = 2
+text = "Horizontal Sensibility"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Horizontal Slider" type="HSlider" parent="VBoxContainer/Horizontal Sensibility"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.2
+
+[node name="Vertical Sensibility" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Vertical Label" type="Label" parent="VBoxContainer/Vertical Sensibility"]
+layout_mode = 2
+text = "Vertical Sensibility"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Vertical Slider" type="HSlider" parent="VBoxContainer/Vertical Sensibility"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.1
+
+[node name="Volume" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Volume Label" type="Label" parent="VBoxContainer/Volume"]
+layout_mode = 2
+text = "Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Volume Slider" type="HSlider" parent="VBoxContainer/Volume"]
+layout_mode = 2
+min_value = -50.0
+max_value = -20.0
+step = 2.0
+value = -34.0
+
+[node name="Return Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_8kkx6")
+text = "RETURN"
+
+[node name="Quit Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_2d45u")
+theme_override_styles/hover = ExtResource("4_bp3vl")
+theme_override_styles/pressed = ExtResource("5_sbqsf")
+text = "QUIT GAME"
+
+[connection signal="value_changed" from="VBoxContainer/Horizontal Sensibility/Horizontal Slider" to="." method="_on_horizontal_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Vertical Sensibility/Vertical Slider" to="." method="_on_vertical_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Volume/Volume Slider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/Return Button" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit Button" to="." method="_on_quit_button_pressed"]

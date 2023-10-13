@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://ds0nq6bl4doee"]
+
+[ext_resource type="Script" path="res://assets/player/hider/hider.gd" id="1_ycexa"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fq0un"]
+radius = 0.1
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j6dnq"]
+radius = 0.1
+height = 0.5
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wygno"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[node name="Hider" type="CharacterBody3D" node_paths=PackedStringArray("raycast", "ability_timer", "ability_cooldown_timer", "hider_mesh", "hider_collision", "rig", "camera_mount", "camera")]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("1_ycexa")
+raycast = NodePath("Camera Mount/Camera3D/Props Raycast")
+ability_timer = NodePath("Ability Timer")
+ability_cooldown_timer = NodePath("Ability Cooldown")
+hider_mesh = NodePath("Visuals/Mesh")
+hider_collision = NodePath("Collision")
+rig = NodePath("Visuals")
+camera_mount = NodePath("Camera Mount")
+camera = NodePath("Camera Mount/Camera3D")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Mesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.254186, 0)
+mesh = SubResource("CapsuleMesh_fq0un")
+
+[node name="Camera Mount" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Camera Mount"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.07875, 1.10113)
+
+[node name="Props Raycast" type="RayCast3D" parent="Camera Mount/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, 0, 0)
+target_position = Vector3(0, -3, 0)
+collision_mask = 4
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.254186, 0)
+shape = SubResource("CapsuleShape3D_j6dnq")
+
+[node name="Ability Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Ability Cooldown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wygno")
+
+[connection signal="timeout" from="Ability Timer" to="." method="_on_ability_timer_timeout"]
+[connection signal="timeout" from="Ability Cooldown" to="." method="_on_ability_cooldown_timeout"]

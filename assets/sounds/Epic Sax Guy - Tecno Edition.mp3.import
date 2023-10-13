@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d2sht0tfjmaaf"
+path="res://.godot/imported/Epic Sax Guy - Tecno Edition.mp3-7bc66bf8cb8f8b7078b6263c092c1cb8.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Epic Sax Guy - Tecno Edition.mp3"
+dest_files=["res://.godot/imported/Epic Sax Guy - Tecno Edition.mp3-7bc66bf8cb8f8b7078b6263c092c1cb8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

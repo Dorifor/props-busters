@@ -1,0 +1,45 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://rry0vxdb3l3k"]
+
+[ext_resource type="FontFile" uid="uid://by0k5nkv3reqj" path="res://assets/fonts/Outfit-Bold.ttf" id="1_i1snl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iot2t"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.223529, 0.223529, 0.223529, 0.870588)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4u3g1"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0.870588)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iueap"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0.870588)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[resource]
+Button/fonts/font = ExtResource("1_i1snl")
+Button/styles/hover = SubResource("StyleBoxFlat_iot2t")
+Button/styles/normal = SubResource("StyleBoxFlat_4u3g1")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_iueap")
