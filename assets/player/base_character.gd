@@ -28,6 +28,7 @@ func _ready():
 
 func _input(event):
 	if not is_multiplayer_authority(): return
+	if Globals.IS_GAME_PAUSED: return
 	
 	var horizontal_sens = Globals.HORIZONTAL_SENSIBILITY_VALUE
 	var vertical_sens = Globals.VERTICAL_SENSIBILITY_VALUE 
@@ -51,6 +52,7 @@ func _process(_delta):
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
+	if Globals.IS_GAME_PAUSED: return
 	
 	var speed: float
 	if Input.is_action_pressed("run"):
@@ -87,4 +89,3 @@ func pause():
 	Globals.IS_GAME_PAUSED = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	pause_menu.visible = true
-	get_tree().paused = true

@@ -17,6 +17,7 @@ func _ready():
 func _process(delta):
 	super(delta)
 	if not is_multiplayer_authority(): return
+	if Globals.IS_GAME_PAUSED: return
 	
 	if(velocity == Vector3.ZERO):
 		idle_animation_parameters.rpc()
@@ -25,7 +26,7 @@ func _process(delta):
 			update_animation_parameters.rpc()
 		else :
 			walk_animation_parameters.rpc()
-			
+	
 	if Input.is_action_just_pressed("attack"):
 		shoot()
 
