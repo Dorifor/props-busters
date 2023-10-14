@@ -35,11 +35,10 @@ func add_prop_player(peer_id):
 	var player = hider_scene.instantiate()
 	# Là j'essaie de faire spawn sur le path à un endroit random
 #	spawn_path_follow.progress_ratio = randf()
-#	player.name = str(peer_id)
+	player.name = str(peer_id)
 	add_child(player)
-	await get_tree().create_timer(.5).timeout # j'ai tente avec un timer, ca change r
+	await get_tree().create_timer(3).timeout # j'ai tente avec un timer, ca change r
 	player.position = spawn1.position
-	print(player.position)
 
 
 func _on_server_disconnected():
