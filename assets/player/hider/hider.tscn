@@ -19,6 +19,10 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
 properties/1/watch = false
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
 
 [node name="Hider" type="CharacterBody3D" node_paths=PackedStringArray("raycast", "ability_timer", "ability_cooldown_timer", "hider_mesh", "hider_collision", "rig", "camera_mount", "camera")]
 collision_layer = 4
