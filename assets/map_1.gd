@@ -4,8 +4,7 @@ signal server_disconnected
 
 const Player = preload("res://assets/player/hunter.tscn")
 const PropsPlayer = preload("res://assets/player/hider/hider.tscn")
-
-
+	
 func _ready():
 	if not is_multiplayer_authority(): return
 	
@@ -15,7 +14,6 @@ func _ready():
 	for player in Globals.PLAYER_DATA.keys():
 		if (player != 1):
 			add_prop_player(player)
-
 
 func add_player(peer_id):
 	if not is_multiplayer_authority(): return

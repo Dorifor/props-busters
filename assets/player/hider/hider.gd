@@ -41,7 +41,6 @@ func _input(event):
 	if event is InputEventKey and event.is_action("shortening") and not is_short and is_ability_available:
 		activate_power()
 
-
 func _process(_delta):
 	super(_delta)
 	if not is_multiplayer_authority(): return
@@ -52,7 +51,10 @@ func _process(_delta):
 		var collider = raycast.get_collider()
 		focused_prop = collider
 
-
+@rpc("call_local")
+func test(focused_mesh):
+	hider_mesh.mesh = null #ICI ON DOIT RECUP LE MESH MAIS QUAND JE LE RECUP SA CRASH
+	
 func transform_into_prop():
 	if not is_multiplayer_authority(): return
 	
@@ -64,8 +66,9 @@ func transform_into_prop():
 	hider_collision.position.y = focused_collision.position.y
 	scale = focused_prop.scale
 	position.y = focused_prop.position.y
-
-
+	test.rpc(focused_mesh)
+	
+	
 func activate_power():
 	if not is_multiplayer_authority(): return
 	
