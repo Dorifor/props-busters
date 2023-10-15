@@ -45,9 +45,8 @@ func add_prop_player(peer_id):
 
 
 func _on_server_disconnected():
-	print("pu server")
-	multiplayer.multiplayer_peer = null
 	multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer = null
 	Globals.PLAYER_DATA.clear()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file(main_menu_scene)

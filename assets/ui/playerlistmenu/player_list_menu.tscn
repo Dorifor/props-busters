@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://du1am3r08n0lw"]
+[gd_scene load_steps=3 format=3 uid="uid://du1am3r08n0lw"]
 
 [ext_resource type="Script" path="res://assets/ui/playerlistmenu/player_list_menu.gd" id="1_71w7g"]
+[ext_resource type="FontFile" uid="uid://cfdt321427s1y" path="res://assets/fonts/Outfit-Regular.ttf" id="2_sc0kf"]
 
 [node name="player_list_menu" type="Control"]
 layout_mode = 3
@@ -26,5 +27,9 @@ offset_right = 291.5
 offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_sc0kf")
+theme_override_font_sizes/font_size = 30
+item_count = 1
+item_0/text = "lama"
 
 [connection signal="player_disconnected" from="." to="." method="_on_player_disconnected"]

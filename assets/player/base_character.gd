@@ -43,9 +43,8 @@ func _input(event):
 	var vertical_sens = Globals.VERTICAL_SENSIBILITY_VALUE 
 	
 	if Input.is_action_just_pressed("tab"):
-		if playerlistload.visible == false:
 			playerlistload.show()
-		else:
+	if Input.is_action_just_released("tab"):
 			playerlistload.hide()
 		
 	if event is InputEventMouseMotion:
