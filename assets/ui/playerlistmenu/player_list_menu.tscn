@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://du1am3r08n0lw"]
+
+[ext_resource type="Script" path="res://assets/ui/playerlistmenu/player_list_menu.gd" id="1_71w7g"]
+
+[node name="player_list_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_71w7g")
+
+[node name="playerlist" type="ItemList" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -291.5
+offset_top = -160.0
+offset_right = 291.5
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="player_disconnected" from="." to="." method="_on_player_disconnected"]

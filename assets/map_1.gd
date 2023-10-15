@@ -6,14 +6,18 @@ signal server_disconnected
 @export var hider_scene: PackedScene
 @export var spawn_path_follow: PathFollow3D
 @onready var main_menu_scene = "res://assets/ui/main menu/main_menu.tscn"
+@onready var player_list_menu = "res://assets/ui/playerlistmenu/player_list_menu.tscn"
 @export var multiplayer_spawner: MultiplayerSpawner
+
 
 func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
+
+	
 	if not is_multiplayer_authority():
 		return
-
+	
 	print("MAP 1: ", multiplayer.get_unique_id())
 	await get_tree().process_frame 
 

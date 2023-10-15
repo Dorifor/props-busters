@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=23 format=3 uid="uid://cyflvex77ugkm"]
+=======
+[gd_scene load_steps=22 format=3 uid="uid://cyflvex77ugkm"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://assets/map_1.gd" id="1_7kfct"]
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="1_nytqf"]
@@ -69,6 +73,7 @@ multiplayer_spawner = NodePath("MultiplayerSpawner")
 metadata/_edit_vertical_guides_ = []
 
 [node name="CRTShader" type="Control" parent="."]
+visible = false
 clip_children = 1
 material = SubResource("ShaderMaterial_gbaxg")
 layout_mode = 3
@@ -107,11 +112,13 @@ shadow_blur = 0.5
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
 [node name="MeshGround" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_lmnqh")
 mesh = SubResource("PlaneMesh_fxamy")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("BoxShape3D_t0qas")
 
 [node name="Box" type="StaticBody3D" parent="."]
@@ -165,7 +172,11 @@ gizmo_extents = 0.62
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08038, 0.8, 3.48154)
 gizmo_extents = 0.62
 
+<<<<<<< Updated upstream
 [node name="Fire Hydrant" parent="." instance=ExtResource("13_kkfj7")]
 transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 2, 0.5605, 3)
+=======
+[node name="Asset" type="Node3D" parent="."]
+>>>>>>> Stashed changes
 
 [connection signal="server_disconnected" from="." to="." method="_on_server_disconnected"]
