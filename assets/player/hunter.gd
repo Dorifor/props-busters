@@ -47,14 +47,13 @@ func shoot():
 	var bullet = bullet_scene.instantiate()
 	get_parent().add_child(bullet)
 	
-	# Position du projectile
 	bullet.transform.origin = bullet_spawn_marker.global_transform.origin
-	
-	# Rotation du projectile pour correspondre à la rotation de la caméra
-	bullet.global_transform.basis = camera.global_transform.basis
+	bullet.global_transform.basis = get_cam_rot()
 
 	get_parent().add_child(bullet)
 
+func get_cam_rot():
+	return camera.global_transform.basis
 
 
 func _unhandled_input(_event):
