@@ -17,6 +17,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var base_position: Vector3
 
+var playerlistload
+
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 
@@ -26,6 +28,11 @@ func _ready():
 	camera.current = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	pause_menu = get_tree().get_root().get_node("Main Scene/Pause Menu")
+	
+	var playerlist = load("res://assets/ui/playerlistmenu/player_list_menu.tscn")
+	playerlistload = playerlist.instantiate()
+	add_child(playerlistload)
+	playerlistload.visible = false
 
 
 func _input(event):
@@ -35,6 +42,12 @@ func _input(event):
 	var horizontal_sens = Globals.HORIZONTAL_SENSIBILITY_VALUE
 	var vertical_sens = Globals.VERTICAL_SENSIBILITY_VALUE 
 	
+	if Input.is_action_just_pressed("tab"):
+		if playerlistload.visible == false:
+			playerlistload.show()
+		else:
+			playerlistload.hide()
+		
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * horizontal_sens))
 		
