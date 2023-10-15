@@ -22,7 +22,7 @@ func _input(event):
 		camera.position = Vector3(0.659,1.791,0.62)
 		lockRotate = true;
 		if Input.is_action_just_pressed("attack"):
-			shoot()
+			shoot.rpc()
 	else :
 		aim.visible = false
 		camera.position = Vector3(0.46,2.47,2.10)
@@ -42,7 +42,7 @@ func _process(delta):
 		else :
 			walk_animation_parameters.rpc()
 
-
+@rpc("call_local")
 func shoot():
 	var bullet = bullet_scene.instantiate()
 	get_parent().add_child(bullet)
