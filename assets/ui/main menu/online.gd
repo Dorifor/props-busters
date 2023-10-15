@@ -172,7 +172,8 @@ func _on_back_button_pressed() -> void:
 		multi_peer.disconnect_peer(peer)
 	if multi_peer: multi_peer.close()
 	multiplayer.multiplayer_peer = null
-	base_menu.visible = true
-	menu_panel.visible = true
-	lobby_panel.visible = false
+	start_game_button.show()
+	base_menu.show()
+	menu_panel.show()
+	lobby_panel.hide()
 	self.visible = false
