@@ -9,7 +9,6 @@ signal server_disconnected
 @onready var player_list_menu = "res://assets/ui/playerlistmenu/player_list_menu.tscn"
 @export var multiplayer_spawner: MultiplayerSpawner
 
-
 func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
