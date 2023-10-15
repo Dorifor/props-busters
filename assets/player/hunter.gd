@@ -56,7 +56,6 @@ func shoot():
 	get_parent().add_child(bullet)
 
 
-
 func _unhandled_input(_event):
 	if not is_multiplayer_authority(): return
 

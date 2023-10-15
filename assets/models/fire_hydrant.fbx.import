@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bvrt7hwpc0c3b"
-path="res://.godot/imported/ghost.glb-91a436c347ead7742dc617f5f30118cf.scn"
+uid="uid://coha22ynpbexk"
+path="res://.godot/imported/fire_hydrant.fbx-d7ac9b5f4d9365c462b4ec682bcd28e0.scn"
 
 [deps]
 
-source_file="res://assets/props/ghost.glb"
-dest_files=["res://.godot/imported/ghost.glb-91a436c347ead7742dc617f5f30118cf.scn"]
+source_file="res://assets/models/fire_hydrant.fbx"
+dest_files=["res://.godot/imported/fire_hydrant.fbx-d7ac9b5f4d9365c462b4ec682bcd28e0.scn"]
 
 [params]
 

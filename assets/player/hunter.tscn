@@ -214,13 +214,14 @@ properties/2/sync = true
 properties/2/watch = true
 
 [node name="Hunter" type="CharacterBody3D" node_paths=PackedStringArray("bullet_spawn_marker", "animation_tree", "animation_player", "rig", "camera_mount", "camera")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_layer = 2
 script = ExtResource("1_rlaiu")
 bullet_scene = ExtResource("2_l18qb")
 bullet_spawn_marker = NodePath("visuals/Character/Bullet Launch")
 animation_tree = NodePath("visuals/Character/AnimationTree")
 animation_player = NodePath("visuals/Character/AnimationPlayer")
+walking_speed = 4
+run_speed = 7
 rig = NodePath("visuals")
 camera_mount = NodePath("Camera_mount")
 camera = NodePath("Camera_mount/Camera3D")
