@@ -545,7 +545,7 @@ transform = Transform3D(1, -7.45058e-09, 1.62981e-09, 7.45058e-09, 1, 0, 1.86265
 [node name="Camera_mount" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Camera_mount"]
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.37875, 2.10113)
+transform = Transform3D(2, 0, 0, 0, 1.87939, 0.684039, 0, -0.684039, 1.87939, 0.466422, 2.4702, 2.10113)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.868459, 0)

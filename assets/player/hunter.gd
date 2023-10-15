@@ -13,6 +13,16 @@ func _ready():
 	print("HUNTER READY")
 	animation_tree.active = true
 
+func _input(event):
+	super._input(event)
+	if not is_multiplayer_authority(): return
+	
+	if Input.is_action_pressed("aimat"):
+		camera.position = Vector3(0.46,1.79,0.42)
+		lockRotate = true;
+	else :
+		camera.position = Vector3(0.46,2.47,2.10)
+		lockRotate = false;
 
 func _process(delta):
 	super(delta)

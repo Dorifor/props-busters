@@ -12,6 +12,7 @@ class_name BaseCharacter
 
 @export var pause_menu: Control
 
+var lockRotate = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _enter_tree():
@@ -35,7 +36,9 @@ func _input(event):
 	
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * horizontal_sens))
-		rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
+		
+		if lockRotate == false :
+			rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
 		
 		camera_mount.rotate_x((deg_to_rad(-event.relative.y * vertical_sens)))
 		var camera_rotation = camera_mount.rotation_degrees
@@ -47,8 +50,8 @@ func _input(event):
 
 
 func _process(_delta):
-	if not is_multiplayer_authority(): return
-
+	if not is_multiplayer_authority():
+		return
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
@@ -74,8 +77,8 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
-		
 		rig.look_at(position + -direction)
+		
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
