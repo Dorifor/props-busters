@@ -356,7 +356,7 @@ grow_vertical = 2
 visible = false
 
 [node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
-process_mode = 3
+process_mode = 0
 visible = false
 z_index = -1
 music_player = NodePath("../Music Player")
@@ -729,7 +729,7 @@ transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 [node name="RootNode" type="Node3D" parent="Asset/house18/visual"]
 
 [node name="house" type="MeshInstance3D" parent="Asset/house18/visual/RootNode"]
-transform = Transform3D(100, 4.54747e-13, 0, 0, -1.19209e-05, 100, 4.54747e-13, -100, -1.19209e-05, 3.12899, 8.99786, 3.21705)
+transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_mvo08")
 skeleton = NodePath("")
 
