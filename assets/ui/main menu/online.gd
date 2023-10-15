@@ -18,8 +18,8 @@ const MAX_CONNECTIONS = 20
 @export var alert_box: Control
 @export var alert_message: Label
 
-@export var main_menu_scene: PackedScene
-@export var main_scene: PackedScene
+@onready var main_menu_scene = "res://assets/ui/main menu/main_menu.tscn"
+@onready var main_scene = "res://assets/main.tscn"
 
 var players = {}
 
@@ -136,7 +136,7 @@ func _on_connected_fail():
 func _on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	players.clear()
-	get_tree().change_scene_to_packed(main_menu_scene)
+	get_tree().change_scene_to_file(main_menu_scene)
 
 
 func _on_start_game_pressed():
@@ -149,7 +149,7 @@ func start_game():
 	Globals.PLAYER_NUMBER = players.size()
 	Globals.PLAYER_DATA = players
 	Globals.ID_CURRENTPLAYER = multiplayer.get_unique_id()
-	get_tree().change_scene_to_packed(main_scene)
+	get_tree().change_scene_to_file(main_scene)
 
 
 func _on_validation_button_pressed():
