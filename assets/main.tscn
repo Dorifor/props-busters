@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cyflvex77ugkm"]
+[gd_scene load_steps=35 format=3 uid="uid://cyflvex77ugkm"]
 
 [ext_resource type="Script" path="res://assets/map_1.gd" id="1_7kfct"]
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="1_nytqf"]
@@ -7,11 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/hunter.tscn" id="2_x28bk"]
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_abh5i"]
 [ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="3_xhk2i"]
+[ext_resource type="PackedScene" uid="uid://bbua5yo0dvsfs" path="res://assets/ui/main menu/main_menu.tscn" id="4_n304w"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_8fnkr"]
 [ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/trashcan.tscn" id="8_5qy7n"]
 [ext_resource type="PackedScene" uid="uid://buq0vob7sl6lb" path="res://assets/props/lamp.tscn" id="8_y5anu"]
 [ext_resource type="PackedScene" uid="uid://bhcfxwgtwohhk" path="res://assets/props/prop.tscn" id="9_khxab"]
-[ext_resource type="Script" path="res://assets/CustomSpawner.gd" id="12_2ulay"]
+[ext_resource type="Script" path="res://assets/custom_spawner.gd" id="12_ef6wd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("2_7rl6p")
@@ -322,13 +323,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xb73q")
 
-[node name="Main Scene" type="Node3D" node_paths=PackedStringArray("spawn_path_follow", "spawn1", "spawn2")]
+[node name="Main Scene" type="Node3D" node_paths=PackedStringArray("spawn_path_follow", "multiplayer_spawner")]
 script = ExtResource("1_7kfct")
 hunter_scene = ExtResource("2_x28bk")
 hider_scene = ExtResource("3_xhk2i")
 spawn_path_follow = NodePath("SpawnPath/PathFollow3D")
-spawn1 = NodePath("Spawn1")
-spawn2 = NodePath("Spawn2")
+main_menu_scene = ExtResource("4_n304w")
+multiplayer_spawner = NodePath("MultiplayerSpawner")
 metadata/_edit_vertical_guides_ = []
 
 [node name="CRTShader" type="Control" parent="."]
@@ -412,10 +413,13 @@ curve = SubResource("Curve3D_h6g16")
 transform = Transform3D(-0.0129187, 0, 0.999902, 0, 1, 0, -0.999902, 0, -0.0129187, 2.96606, 0, 4.12079)
 progress = 18.6126
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." node_paths=PackedStringArray("spawn_path_follow")]
 _spawnable_scenes = PackedStringArray("res://assets/player/hider/hider.tscn", "res://assets/player/hunter.tscn")
 spawn_path = NodePath("..")
-script = ExtResource("12_2ulay")
+script = ExtResource("12_ef6wd")
+hider_scene = ExtResource("3_xhk2i")
+hunter_scene = ExtResource("2_x28bk")
+spawn_path_follow = NodePath("../SpawnPath/PathFollow3D")
 
 [node name="Spawn1" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54026, 0.999999, -1.65113)

@@ -50,10 +50,14 @@ func _process(_delta):
 	
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
-		if collider is StaticBody2D:
+		if collider is StaticBody3D:
 			interact_ui.visible = true
 			is_focusing_prop = true
 			focused_prop = collider
+	else:
+		focused_prop = null
+		is_focusing_prop = false
+		interact_ui.visible = false
 
 
 @rpc("call_local")

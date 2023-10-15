@@ -728,9 +728,9 @@ skeleton = NodePath("")
 [node name="Trashcan" parent="." instance=ExtResource("8_71ony")]
 transform = Transform3D(0.579, 0, 0, 0, 0.579, 0, 0, 0, 0.579, -2.66496, 0.255914, 0)
 
-[node name="Player Props" parent="." node_paths=PackedStringArray("pause_menu", "interact_ui") instance=ExtResource("9_l3jar")]
-pause_menu = NodePath("../Pause Menu")
+[node name="Player Props" parent="." node_paths=PackedStringArray("interact_ui", "pause_menu") instance=ExtResource("9_l3jar")]
 interact_ui = NodePath("../Interact")
+pause_menu = NodePath("../Pause Menu")
 
 [node name="Prop" parent="." instance=ExtResource("10_ouafy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73258, 0.255, 3.38555)

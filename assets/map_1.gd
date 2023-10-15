@@ -6,8 +6,7 @@ signal server_disconnected
 @export var hider_scene: PackedScene
 @export var spawn_path_follow: PathFollow3D
 @export var main_menu_scene: PackedScene
-@export var spawn1: Marker3D
-@export var spawn2: Marker3D
+@export var multiplayer_spawner: MultiplayerSpawner
 
 func _ready():
 	if not is_multiplayer_authority(): return
@@ -23,26 +22,13 @@ func _ready():
 
 
 func add_player(peer_id):
-#	if not is_multiplayer_authority(): return
-	print("[%s] player %s added" % [multiplayer.get_unique_id(), peer_id])
-	
-	var player = hunter_scene.instantiate() as BaseCharacter
-	spawn_path_follow.progress_ratio = randf()
-#	player.position = spawn_path_follow.position
-	player.base_position = spawn_path_follow.position
-	player.name = str(peer_id)
-	add_child(player)
+	if not is_multiplayer_authority(): return
+	multiplayer_spawner.spawn({ "peer_id": peer_id, "player_type": Constants.PlayerType.HUNTER_TYPE })
 
 
 func add_prop_player(peer_id):
 	if not is_multiplayer_authority(): return
-	print("[%s] prop player %s added" % [multiplayer.get_unique_id(), peer_id])
-	
-	var player: BaseCharacter = hider_scene.instantiate() as BaseCharacter
-	spawn_path_follow.progress_ratio = randf()
-	player.base_position = spawn_path_follow.position
-	player.name = str(peer_id)
-	add_child(player)
+	multiplayer_spawner.spawn({ "peer_id": peer_id, "player_type": Constants.PlayerType.HIDER_TYPE })
 
 
 func _on_server_disconnected():
