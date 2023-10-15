@@ -7,11 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/hunter.tscn" id="2_x28bk"]
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_abh5i"]
 [ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="3_xhk2i"]
-[ext_resource type="PackedScene" uid="uid://bbua5yo0dvsfs" path="res://assets/ui/main menu/main_menu.tscn" id="4_3oiv0"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_8fnkr"]
 [ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/trashcan.tscn" id="8_5qy7n"]
 [ext_resource type="PackedScene" uid="uid://buq0vob7sl6lb" path="res://assets/props/lamp.tscn" id="8_y5anu"]
 [ext_resource type="PackedScene" uid="uid://bhcfxwgtwohhk" path="res://assets/props/prop.tscn" id="9_khxab"]
+[ext_resource type="Script" path="res://assets/CustomSpawner.gd" id="12_2ulay"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("2_7rl6p")
@@ -327,7 +327,6 @@ script = ExtResource("1_7kfct")
 hunter_scene = ExtResource("2_x28bk")
 hider_scene = ExtResource("3_xhk2i")
 spawn_path_follow = NodePath("SpawnPath/PathFollow3D")
-main_menu_scene = ExtResource("4_3oiv0")
 spawn1 = NodePath("Spawn1")
 spawn2 = NodePath("Spawn2")
 metadata/_edit_vertical_guides_ = []
@@ -416,13 +415,14 @@ progress = 18.6126
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://assets/player/hider/hider.tscn", "res://assets/player/hunter.tscn")
 spawn_path = NodePath("..")
+script = ExtResource("12_2ulay")
 
 [node name="Spawn1" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54026, 0.999999, -1.65113)
 gizmo_extents = 0.62
 
 [node name="Spawn2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.54336, 0.8, -1.28459)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08038, 0.8, 3.48154)
 gizmo_extents = 0.62
 
 [node name="Asset" type="Node3D" parent="."]

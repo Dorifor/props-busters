@@ -7,6 +7,6 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-#	if body is Hider:
-#	body._on_bullet_colliding()
+	if body is Hider:
+		body._on_bullet_colliding()
 	queue_free()

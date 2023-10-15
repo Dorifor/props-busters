@@ -10,7 +10,6 @@ class_name Hunter
 func _ready():
 	super()
 	if not is_multiplayer_authority(): return
-	print("HUNTER READY")
 	animation_tree.active = true
 
 
@@ -39,7 +38,7 @@ func shoot():
 	get_parent().add_child(bullet)
 
 
-func _unhandled_input(event):
+func _unhandled_input(_event):
 	if not is_multiplayer_authority(): return
 
 

@@ -30,10 +30,6 @@ window/vsync/vsync_mode=0
 
 naming/node_name_num_separator=1
 
-[gui]
-
-timers/tooltip_delay_sec=0.0
-
 [input]
 
 forward={

@@ -28,6 +28,8 @@ func _ready():
 	super()
 	if not is_multiplayer_authority(): return
 	interact_ui = get_tree().get_root().get_node("Main Scene/Interact")
+#	position = base_position
+	print("position: ", multiplayer.get_unique_id(), " ", position)
 
 
 func _input(event):

@@ -14,16 +14,22 @@ class_name BaseCharacter
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var base_position: Vector3
+
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
+	if not is_multiplayer_authority(): return
+	print("[%s] %s ENTERED TREE" % [multiplayer.get_unique_id(), str(name)])
+	print("[%s] base position: %s" % [multiplayer.get_unique_id(), str(base_position)])
 
 
 func _ready():
 	if not is_multiplayer_authority(): return
-	print("BASE CHARACTER READY")
 	camera.current = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	pause_menu = get_tree().get_root().get_node("Main Scene/Pause Menu")
+	position = base_position
+	print("[%s] position: %s" % [multiplayer.get_unique_id(), str(position)])
 
 
 func _input(event):
@@ -47,7 +53,7 @@ func _input(event):
 
 
 func _process(_delta):
-	if not is_multiplayer_authority(): return
+	pass
 
 
 func _physics_process(delta):

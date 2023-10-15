@@ -49,13 +49,11 @@ func _on_join_button_pressed(address = "localhost"):
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, PORT)
 	
-	print (error)
-	
 	if error:
+		print(error)
 		return error
 	
 	multiplayer.multiplayer_peer = peer
-	print(players)
 
 
 func _on_host_button_pressed():
@@ -73,7 +71,6 @@ func _on_host_button_pressed():
 	multiplayer.multiplayer_peer = peer
 	players[1] = player_info
 	player_connected.emit(1, player_info)
-	print(players)
 
 
 func remove_multiplayer_peer():
@@ -104,8 +101,8 @@ func player_loaded():
 			players_loaded = 0
 
 
-func _process(delta):
-	update_list()
+#func _process(_delta):
+#	update_list()
 
 
 func _on_player_connected(id):
@@ -117,6 +114,7 @@ func _register_player(new_player_info):
 	var new_player_id = multiplayer.get_remote_sender_id()
 	players[new_player_id] = new_player_info
 	player_connected.emit(new_player_id, new_player_info)
+	update_list()
 
 
 func _on_player_disconnected(id):
@@ -152,7 +150,6 @@ func start_game():
 	Globals.PLAYER_NUMBER = players.size()
 	Globals.PLAYER_DATA = players
 	Globals.ID_CURRENTPLAYER = multiplayer.get_unique_id()
-	print(players.size())
 	get_tree().change_scene_to_packed(main_scene)
 
 
