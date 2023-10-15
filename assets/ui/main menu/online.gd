@@ -27,7 +27,6 @@ var player_info = {"name": "Default"}
 
 var players_loaded = 0
 
-
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)

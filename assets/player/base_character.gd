@@ -38,7 +38,7 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * horizontal_sens))
 		
-		if lockRotate == false :
+		if !lockRotate:
 			rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
 		
 		camera_mount.rotate_x((deg_to_rad(-event.relative.y * vertical_sens)))
@@ -78,11 +78,16 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
-		rig.look_at(position + -direction)
+		if !lockRotate:
+			rig.look_at(position + -direction)
+		else:
+			rig.rotation = Vector3(0, 160, 0)
 		
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+		if lockRotate:
+			rig.rotation = Vector3(0, 160, 0)
 
 	move_and_slide()
 

@@ -1,9 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://dwi6774fpqp26"]
+[gd_scene load_steps=28 format=3 uid="uid://dwi6774fpqp26"]
 
 [ext_resource type="Script" path="res://assets/player/hunter.gd" id="1_rlaiu"]
 [ext_resource type="PackedScene" uid="uid://dl7tgrlaahein" path="res://assets/player/weapons/bullet.tscn" id="2_l18qb"]
 [ext_resource type="Texture2D" uid="uid://cvdhqyp8rqiex" path="res://assets/player/hunter_skin.png" id="3_5pg3h"]
-[ext_resource type="PackedScene" uid="uid://cey0hutc320lh" path="res://assets/player/weapons/sword_low_new.fbx" id="4_m1h3i"]
 [ext_resource type="Animation" uid="uid://cr2teovcyfjue" path="res://assets/player/animations/A_Attack.res" id="5_tak7j"]
 [ext_resource type="Animation" uid="uid://b4ereetvvh4xb" path="res://assets/player/animations/A_Idle.res" id="6_yxnc6"]
 [ext_resource type="Animation" uid="uid://bssvnahhqtn52" path="res://assets/player/animations/A_Run.res" id="7_ta1vt"]
@@ -526,9 +525,6 @@ transform = Transform3D(-0.857623, -0.147128, 0.739004, -0.620155, -0.304762, -0
 bone_name = "hand.R_end"
 bone_idx = 17
 
-[node name="sword_low_new" parent="visuals/Character/RootNode/metarig/Skeleton3D/BoneAttachment3D" instance=ExtResource("4_m1h3i")]
-transform = Transform3D(0.009, 0, 0, 0, 0.009, 0, 0, 0, 0.009, 0, 0, 0)
-
 [node name="AnimationTree" type="AnimationTree" parent="visuals/Character"]
 tree_root = SubResource("AnimationNodeStateMachine_b4hd0")
 anim_player = NodePath("../AnimationPlayer")
@@ -553,3 +549,25 @@ shape = SubResource("BoxShape3D_2jc6r")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yytjy")
+
+[node name="aim" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="aim"]
+layout_mode = 0
+offset_top = 35.0
+offset_right = 5.0
+offset_bottom = 40.0
+color = Color(0.858824, 0, 0.121569, 0.666667)
