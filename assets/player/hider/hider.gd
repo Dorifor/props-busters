@@ -41,34 +41,59 @@ func _input(event):
 	if event is InputEventKey and event.is_action("shortening") and not is_short and is_ability_available:
 		activate_power()
 
+
 func _process(_delta):
 	super(_delta)
 	if not is_multiplayer_authority(): return
 	
-	interact_ui.visible = raycast.is_colliding()
-	is_focusing_prop = raycast.is_colliding()
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
-		focused_prop = collider
+		if collider is StaticBody2D:
+			interact_ui.visible = true
+			is_focusing_prop = true
+			focused_prop = collider
+
 
 @rpc("call_local")
-func test(focused_mesh):
-	hider_mesh.mesh = null #ICI ON DOIT RECUP LE MESH MAIS QUAND JE LE RECUP SA CRASH
+func propage_prop_change(prop_change_dict):
+#	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
+#		return
 	
+	var mesh = load(prop_change_dict.mesh.path)
+	var shape = load(prop_change_dict.collision.path)
+	
+	hider_mesh.mesh = mesh
+	hider_mesh.position.y = prop_change_dict.mesh.y
+	hider_collision.shape = shape
+	hider_collision.position.y = prop_change_dict.collision.y
+
+
 func transform_into_prop():
 	if not is_multiplayer_authority(): return
 	
 	var focused_mesh: MeshInstance3D = focused_prop.get_node("Mesh")
 	var focused_collision: CollisionShape3D = focused_prop.get_node("Collision")
-	hider_mesh.mesh = focused_mesh.mesh
-	hider_mesh.position.y = focused_mesh.position.y
-	hider_collision.shape = focused_collision.shape
-	hider_collision.position.y = focused_collision.position.y
+#	hider_mesh.mesh = focused_mesh.mesh
+#	hider_mesh.position.y = focused_mesh.position.y
+#	hider_collision.shape = focused_collision.shape
+#	hider_collision.position.y = focused_collision.position.y
 	scale = focused_prop.scale
 	position.y = focused_prop.position.y
-	test.rpc(focused_mesh)
 	
+	var prop_change_payload = {
+		"mesh": {
+			"path": focused_mesh.mesh.resource_path,
+			"y": focused_mesh.position.y
+		},
+		"collision": {
+			"path": focused_collision.shape.resource_path,
+			"y": focused_collision.position.y
+		}
+	}
 	
+	propage_prop_change.rpc(prop_change_payload)
+
+
 func activate_power():
 	if not is_multiplayer_authority(): return
 	

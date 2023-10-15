@@ -34,6 +34,7 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	multiplayer.connection_failed.connect(_on_connected_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	username_input.text = str(randi())
 
 
 func _on_join_button_pressed(address = "localhost"):

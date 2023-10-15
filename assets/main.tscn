@@ -1,12 +1,17 @@
-[gd_scene load_steps=28 format=3 uid="uid://cyflvex77ugkm"]
+[gd_scene load_steps=34 format=3 uid="uid://cyflvex77ugkm"]
 
 [ext_resource type="Script" path="res://assets/map_1.gd" id="1_7kfct"]
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="1_nytqf"]
 [ext_resource type="Shader" path="res://assets/ui/shader/CRTshader.gdshader" id="2_7rl6p"]
 [ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/interact.tscn" id="2_jr3q3"]
+[ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/hunter.tscn" id="2_x28bk"]
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_abh5i"]
+[ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="3_xhk2i"]
+[ext_resource type="PackedScene" uid="uid://bbua5yo0dvsfs" path="res://assets/ui/main menu/main_menu.tscn" id="4_3oiv0"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_8fnkr"]
 [ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/trashcan.tscn" id="8_5qy7n"]
+[ext_resource type="PackedScene" uid="uid://buq0vob7sl6lb" path="res://assets/props/lamp.tscn" id="8_y5anu"]
+[ext_resource type="PackedScene" uid="uid://bhcfxwgtwohhk" path="res://assets/props/prop.tscn" id="9_khxab"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("2_7rl6p")
@@ -46,6 +51,13 @@ albedo_color = Color(0, 0, 0, 0.721569)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hth55"]
 size = Vector3(1, 0.2, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_h6g16"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.45663, 0, -5.48647, 0, 0, 0, 0, 0, 0, 4.38122, 0, -5.19909, 0, 0, 0, 0, 0, 0, 4.43347, 0, 4.10183, 0, 0, 0, 0, 0, 0, -5.67735, 0, 4.23246, 0, 0, 0, 0, 0, 0, -3.45663, 0, -5.48647),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_md2oj"]
 size = Vector3(25.3443, 20.6624, 9.19328)
@@ -310,8 +322,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xb73q")
 
-[node name="Main Scene" type="Node3D"]
+[node name="Main Scene" type="Node3D" node_paths=PackedStringArray("spawn_path_follow", "spawn1", "spawn2")]
 script = ExtResource("1_7kfct")
+hunter_scene = ExtResource("2_x28bk")
+hider_scene = ExtResource("3_xhk2i")
+spawn_path_follow = NodePath("SpawnPath/PathFollow3D")
+main_menu_scene = ExtResource("4_3oiv0")
+spawn1 = NodePath("Spawn1")
+spawn2 = NodePath("Spawn2")
+metadata/_edit_vertical_guides_ = []
 
 [node name="CRTShader" type="Control" parent="."]
 clip_children = 1
@@ -373,6 +392,38 @@ shape = SubResource("BoxShape3D_hth55")
 
 [node name="Music Player" parent="." instance=ExtResource("5_8fnkr")]
 process_mode = 3
+
+[node name="Trashcan" parent="." instance=ExtResource("8_5qy7n")]
+transform = Transform3D(0.579, 0, 0, 0, 0.579, 0, 0, 0, 0.579, -2.66496, 0.255914, 0)
+
+[node name="Trashcan2" parent="." instance=ExtResource("8_5qy7n")]
+transform = Transform3D(1.214, 0, 0, 0, 1.214, 0, 0, 0, 1.214, -1.18889, 0.531097, -1.87659)
+
+[node name="lamp" parent="." instance=ExtResource("8_y5anu")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.99846, 0.705, -2.12413)
+
+[node name="Prop" parent="." instance=ExtResource("9_khxab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.29277, 0.255, 1.47877)
+
+[node name="SpawnPath" type="Path3D" parent="."]
+transform = Transform3D(0.44, 0, 0, 0, 0.44, 0, 0, 0, 0.44, -1.37029, 0.604303, -0.562779)
+curve = SubResource("Curve3D_h6g16")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="SpawnPath"]
+transform = Transform3D(-0.0129187, 0, 0.999902, 0, 1, 0, -0.999902, 0, -0.0129187, 2.96606, 0, 4.12079)
+progress = 18.6126
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://assets/player/hider/hider.tscn", "res://assets/player/hunter.tscn")
+spawn_path = NodePath("..")
+
+[node name="Spawn1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+gizmo_extents = 0.62
+
+[node name="Spawn2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.54336, 0.8, -1.28459)
+gizmo_extents = 0.62
 
 [node name="Asset" type="Node3D" parent="."]
 
@@ -715,12 +766,5 @@ transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_mvo08")
 skeleton = NodePath("")
-
-[node name="Trashcan" parent="." instance=ExtResource("8_5qy7n")]
-transform = Transform3D(0.579, 0, 0, 0, 0.579, 0, 0, 0, 0.579, -2.66496, 0.255914, 0)
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://assets/player/hider/hider.tscn", "res://assets/player/hunter.tscn")
-spawn_path = NodePath("..")
 
 [connection signal="server_disconnected" from="." to="." method="_on_server_disconnected"]
