@@ -32,7 +32,7 @@ func _ready():
 		if player == selected_player:
 			add_player(player)
 		else:
-			add_prop_player(player) 
+			add_prop_player(player)
 
 func add_player(peer_id):
 	if not is_multiplayer_authority(): return

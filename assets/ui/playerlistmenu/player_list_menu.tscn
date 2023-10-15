@@ -14,19 +14,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_71w7g")
 
-[node name="playerlist" type="ItemList" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(800, 400)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -291.5
-offset_top = -160.0
-offset_right = 291.5
-offset_bottom = 160.0
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="playerlist" type="ItemList" parent="VBoxContainer"]
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_sc0kf")
 theme_override_font_sizes/font_size = 30
 item_count = 1

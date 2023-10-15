@@ -1,6 +1,6 @@
 extends Control
 
-@onready var playerlist = $playerlist
+@onready var playerlist = $VBoxContainer/playerlist
 
 signal player_disconnected(peer_id)
 
