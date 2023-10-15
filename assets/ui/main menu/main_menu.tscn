@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bbua5yo0dvsfs"]
+[gd_scene load_steps=28 format=3 uid="uid://bbua5yo0dvsfs"]
 
 [ext_resource type="Shader" path="res://assets/ui/shader/CRTshader.gdshader" id="1_6g2t5"]
 [ext_resource type="Script" path="res://assets/ui/main menu/base_menu.gd" id="2_jf80g"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="3_cs8je"]
 [ext_resource type="FontFile" uid="uid://64n7qesgoljr" path="res://assets/fonts/Outfit-Black.ttf" id="4_lbp0i"]
 [ext_resource type="Script" path="res://assets/ui/main menu/online.gd" id="5_8r2nd"]
+[ext_resource type="FontFile" uid="uid://dmydun8r7gcj5" path="res://assets/fonts/Outfit-Medium.ttf" id="5_p76oq"]
 [ext_resource type="Script" path="res://assets/ui/main menu/menu_camera.gd" id="8_s4yhq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pmbes"]
@@ -27,6 +28,10 @@ shader_parameter/white_noise_rate = 0.0
 [sub_resource type="LabelSettings" id="LabelSettings_qx6wc"]
 font = ExtResource("4_lbp0i")
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_16xff"]
+font = ExtResource("5_p76oq")
+font_size = 24
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hsedh"]
 albedo_texture = ExtResource("3_cs8je")
@@ -314,7 +319,7 @@ _data = {
 "Camera": SubResource("Animation_2scj7")
 }
 
-[node name="main_menu" type="Control"]
+[node name="Main Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -343,7 +348,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BaseMenu" type="Control" parent="." node_paths=PackedStringArray("online_panel")]
+[node name="Base Menu" type="Control" parent="." node_paths=PackedStringArray("online_panel")]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -354,7 +359,7 @@ grow_vertical = 2
 script = ExtResource("2_jf80g")
 online_panel = NodePath("../Online")
 
-[node name="Label" type="Label" parent="BaseMenu"]
+[node name="Label" type="Label" parent="Base Menu"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -363,10 +368,24 @@ offset_left = -40.0
 offset_bottom = 26.0
 grow_horizontal = 0
 theme = ExtResource("3_8nyf7")
-text = "SPOOKTOBER N64 (lol)"
+text = "Props Busters "
 label_settings = SubResource("LabelSettings_qx6wc")
+horizontal_alignment = 2
 
-[node name="Play" type="Button" parent="BaseMenu"]
+[node name="Label 2" type="Label" parent="Base Menu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -323.0
+offset_top = 61.0
+offset_bottom = 95.0
+grow_horizontal = 0
+theme = ExtResource("3_8nyf7")
+text = "by Nice Cook 🤨🤨🤨"
+label_settings = SubResource("LabelSettings_16xff")
+
+[node name="Play" type="Button" parent="Base Menu"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -381,7 +400,7 @@ grow_vertical = 2
 theme = ExtResource("3_8nyf7")
 text = "JOUER"
 
-[node name="Option" type="Button" parent="BaseMenu"]
+[node name="Option" type="Button" parent="Base Menu"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -396,7 +415,7 @@ grow_vertical = 2
 theme = ExtResource("3_8nyf7")
 text = "OPTIONS"
 
-[node name="Quit" type="Button" parent="BaseMenu"]
+[node name="Quit" type="Button" parent="Base Menu"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -412,12 +431,13 @@ grow_vertical = 2
 theme = ExtResource("3_8nyf7")
 text = "QUITTER"
 
-[node name="Online" type="Control" parent="." node_paths=PackedStringArray("menu_panel", "lobby_panel", "ip_address_input", "username_input", "player_list", "start_game_button", "alert_box", "alert_message")]
+[node name="Online" type="Control" parent="." node_paths=PackedStringArray("base_menu", "menu_panel", "lobby_panel", "ip_address_input", "username_input", "player_list", "start_game_button", "alert_box", "alert_message")]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_8r2nd")
+base_menu = NodePath("../Base Menu")
 menu_panel = NodePath("Menu")
 lobby_panel = NodePath("Lobby")
 ip_address_input = NodePath("Menu/MainMenu/MarginContainer/VBoxContainer/Address Input")
@@ -486,6 +506,13 @@ layout_mode = 2
 theme = ExtResource("3_8nyf7")
 text = "Join"
 
+[node name="Back Button" type="Button" parent="Online/Menu/MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("3_8nyf7")
+text = "Back"
+
 [node name="Lobby" type="Control" parent="Online"]
 visible = false
 layout_mode = 1
@@ -525,6 +552,17 @@ offset_bottom = 519.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Start game"
+
+[node name="Back Button" type="Button" parent="Online/Lobby"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 24.0
+offset_right = 101.0
+offset_bottom = 61.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("3_8nyf7")
+text = "Back"
 
 [node name="Alert Box" type="Control" parent="."]
 visible = false
@@ -854,13 +892,15 @@ libraries = {
 "": SubResource("AnimationLibrary_vlmh4")
 }
 
-[connection signal="pressed" from="BaseMenu/Play" to="BaseMenu" method="_on_play_pressed"]
-[connection signal="pressed" from="BaseMenu/Option" to="BaseMenu" method="_on_option_pressed"]
-[connection signal="pressed" from="BaseMenu/Quit" to="BaseMenu" method="_on_quit_pressed"]
+[connection signal="pressed" from="Base Menu/Play" to="Base Menu" method="_on_play_pressed"]
+[connection signal="pressed" from="Base Menu/Option" to="Base Menu" method="_on_option_pressed"]
+[connection signal="pressed" from="Base Menu/Quit" to="Base Menu" method="_on_quit_pressed"]
 [connection signal="player_connected" from="Online" to="Online" method="_on_player_connected"]
 [connection signal="player_disconnected" from="Online" to="Online" method="_on_player_disconnected"]
 [connection signal="server_disconnected" from="Online" to="Online" method="_on_server_disconnected"]
 [connection signal="pressed" from="Online/Menu/MainMenu/MarginContainer/VBoxContainer/Host Button" to="Online" method="_on_host_button_pressed"]
 [connection signal="pressed" from="Online/Menu/MainMenu/MarginContainer/VBoxContainer/Join Button" to="Online" method="_on_join_button_pressed"]
+[connection signal="pressed" from="Online/Menu/MainMenu/Back Button" to="Online" method="_on_back_button_pressed"]
 [connection signal="pressed" from="Online/Lobby/Start Button" to="Online" method="_on_start_game_pressed"]
+[connection signal="pressed" from="Online/Lobby/Back Button" to="Online" method="_on_back_button_pressed"]
 [connection signal="pressed" from="Alert Box/Validation button" to="Online" method="_on_validation_button_pressed"]

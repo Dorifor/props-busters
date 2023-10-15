@@ -9,6 +9,7 @@ const PORT = 7000
 var DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
 const MAX_CONNECTIONS = 20
 
+@export var base_menu: Control
 @export var menu_panel: Control
 @export var lobby_panel: Control
 @export var ip_address_input: LineEdit
@@ -100,8 +101,8 @@ func player_loaded():
 			players_loaded = 0
 
 
-#func _process(_delta):
-#	update_list()
+func _process(_delta):
+	update_list()
 
 
 func _on_player_connected(id):
@@ -146,7 +147,6 @@ func _on_start_game_pressed():
 
 @rpc("any_peer", "call_remote", "reliable")
 func start_game():
-	Globals.PLAYER_NUMBER = players.size()
 	Globals.PLAYER_DATA = players
 	Globals.ID_CURRENTPLAYER = multiplayer.get_unique_id()
 	get_tree().change_scene_to_file(main_scene)
@@ -157,3 +157,22 @@ func _on_validation_button_pressed():
 	multiplayer.multiplayer_peer = null
 	players.clear()
 	get_tree().change_scene_to_packed(main_menu_scene)
+
+
+func _on_back_button_pressed() -> void:
+	player_list.clear()
+	players = {}
+	Globals.ID_CURRENTPLAYER = 0
+	for item in range(player_list.item_count):
+		print(player_list.get_item_at_position(Vector2(0, item)))
+		player_list.remove_item(item)
+	var multi_peer = multiplayer.multiplayer_peer
+	var peer_list = multiplayer.get_peers()
+	for peer in peer_list:
+		multi_peer.disconnect_peer(peer)
+	if multi_peer: multi_peer.close()
+	multiplayer.multiplayer_peer = null
+	base_menu.visible = true
+	menu_panel.visible = true
+	lobby_panel.visible = false
+	self.visible = false
