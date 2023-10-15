@@ -45,7 +45,6 @@ func add_prop_player(peer_id):
 
 
 func _on_server_disconnected():
-	print("pu server")
 	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 	Globals.PLAYER_DATA.clear()
