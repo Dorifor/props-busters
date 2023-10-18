@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bbua5yo0dvsfs"]
+[gd_scene load_steps=35 format=3 uid="uid://bbua5yo0dvsfs"]
 
 [ext_resource type="Shader" path="res://assets/ui/shader/CRTshader.gdshader" id="1_6g2t5"]
 [ext_resource type="Script" path="res://assets/ui/main menu/base_menu.gd" id="2_jf80g"]
@@ -7,12 +7,17 @@
 [ext_resource type="FontFile" uid="uid://64n7qesgoljr" path="res://assets/fonts/Outfit-Black.ttf" id="4_lbp0i"]
 [ext_resource type="Script" path="res://assets/ui/main menu/online.gd" id="5_8r2nd"]
 [ext_resource type="FontFile" uid="uid://dmydun8r7gcj5" path="res://assets/fonts/Outfit-Medium.ttf" id="5_p76oq"]
+[ext_resource type="Texture2D" uid="uid://bnojxuccw4ttu" path="res://assets/ui/icons/play.svg" id="6_vv0m4"]
+[ext_resource type="Texture2D" uid="uid://bcahb44pe7hvk" path="res://assets/ui/icons/settings.svg" id="7_0tden"]
+[ext_resource type="Texture2D" uid="uid://c0hckfoffbqes" path="res://assets/ui/icons/quit.svg" id="8_68dq3"]
 [ext_resource type="Script" path="res://assets/ui/main menu/menu_camera.gd" id="8_s4yhq"]
+[ext_resource type="Script" path="res://assets/ui/main menu/settings_panel.gd" id="10_fvurt"]
+[ext_resource type="AudioStream" uid="uid://wgipu7588bo4" path="res://assets/sounds/Shreksophone (Original).mp3" id="13_rfo4y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pmbes"]
 shader = ExtResource("1_6g2t5")
-shader_parameter/crt_curve = 0.923
-shader_parameter/crt_scan_line_color = 0.686
+shader_parameter/crt_curve = 0.6
+shader_parameter/crt_scan_line_color = 0.559
 shader_parameter/aperture_grille_rate = 0.4
 shader_parameter/rf_switch_esque_blur = 1.0
 shader_parameter/white_noise_rate = 0.0
@@ -32,6 +37,16 @@ font_size = 48
 [sub_resource type="LabelSettings" id="LabelSettings_16xff"]
 font = ExtResource("5_p76oq")
 font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4d84c"]
+bg_color = Color(0.176471, 0.207843, 0.223529, 0.988235)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_butog"]
+font_size = 32
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hsedh"]
 albedo_texture = ExtResource("3_cs8je")
@@ -326,9 +341,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_vertical_guides_ = []
 
 [node name="CRTShader" type="Control" parent="."]
+visible = false
 clip_children = 1
+z_index = 4096
+z_as_relative = false
 material = SubResource("ShaderMaterial_pmbes")
 layout_mode = 1
 anchors_preset = 15
@@ -348,8 +367,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Base Menu" type="Control" parent="." node_paths=PackedStringArray("online_panel")]
-z_index = -1
+[node name="Base Menu" type="Control" parent="." node_paths=PackedStringArray("online_panel", "settings_panel")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -358,84 +376,103 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_jf80g")
 online_panel = NodePath("../Online")
+settings_panel = NodePath("../Settings Panel")
 
-[node name="Label" type="Label" parent="Base Menu"]
+[node name="Game Title" type="Label" parent="Base Menu"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 26.0
-grow_horizontal = 0
+offset_left = 48.0
+offset_top = 24.0
+offset_right = 371.0
+offset_bottom = 88.0
 theme = ExtResource("3_8nyf7")
 text = "Props Busters "
 label_settings = SubResource("LabelSettings_qx6wc")
 horizontal_alignment = 2
 
-[node name="Label 2" type="Label" parent="Base Menu"]
+[node name="Game Subtitle" type="Label" parent="Base Menu"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -323.0
-offset_top = 61.0
-offset_bottom = 95.0
-grow_horizontal = 0
+offset_left = 48.0
+offset_top = 88.0
+offset_right = 371.0
+offset_bottom = 122.0
 theme = ExtResource("3_8nyf7")
 text = "by Nice Cook 🤨🤨🤨"
 label_settings = SubResource("LabelSettings_16xff")
 
 [node name="Play" type="Button" parent="Base Menu"]
+custom_minimum_size = Vector2(96, 0)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -69.0
-offset_top = -43.5
-offset_bottom = -6.5
+offset_left = -134.0
+offset_top = -43.0
+offset_right = -46.0
+offset_bottom = -6.0
 grow_horizontal = 0
 grow_vertical = 2
+focus_mode = 0
 theme = ExtResource("3_8nyf7")
-text = "JOUER"
+theme_type_variation = &"PrimaryButton"
+text = "PLAY"
+icon = ExtResource("6_vv0m4")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Option" type="Button" parent="Base Menu"]
+custom_minimum_size = Vector2(96, 0)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -88.0
+offset_left = -134.0
 offset_top = 6.5
+offset_right = -46.0
 offset_bottom = 43.5
 grow_horizontal = 0
 grow_vertical = 2
+focus_mode = 0
 theme = ExtResource("3_8nyf7")
-text = "OPTIONS"
+theme_type_variation = &"MainMenuButton"
+text = "SETTINGS"
+icon = ExtResource("7_0tden")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Quit" type="Button" parent="Base Menu"]
+custom_minimum_size = Vector2(96, 0)
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = 3
 anchor_left = 1.0
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -89.0
-offset_top = 284.0
-offset_right = -14.0
-offset_bottom = 315.0
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -61.0
+offset_right = -48.0
+offset_bottom = -24.0
 grow_horizontal = 0
-grow_vertical = 2
+grow_vertical = 0
+focus_mode = 0
 theme = ExtResource("3_8nyf7")
-text = "QUITTER"
+theme_type_variation = &"MainMenuButton"
+text = "QUIT"
+icon = ExtResource("8_68dq3")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Online" type="Control" parent="." node_paths=PackedStringArray("base_menu", "menu_panel", "lobby_panel", "ip_address_input", "username_input", "player_list", "start_game_button", "alert_box", "alert_message")]
 visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("5_8r2nd")
 base_menu = NodePath("../Base Menu")
 menu_panel = NodePath("Menu")
@@ -448,9 +485,12 @@ alert_box = NodePath("../Alert Box")
 alert_message = NodePath("../Alert Box/Message")
 
 [node name="Menu" type="Control" parent="Online"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MainMenu" type="PanelContainer" parent="Online/Menu"]
 layout_mode = 1
@@ -459,10 +499,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 279.0
-offset_top = 188.0
-offset_right = 834.0
-offset_bottom = 396.0
+offset_left = -277.5
+offset_top = -111.0
+offset_right = 277.5
+offset_bottom = 111.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_8nyf7")
@@ -529,10 +569,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 829.0
-offset_top = 118.5
-offset_right = 1112.0
-offset_bottom = 489.5
+offset_left = -299.0
+offset_top = -185.5
+offset_right = -16.0
+offset_bottom = 185.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
@@ -540,17 +580,18 @@ size_flags_vertical = 4
 
 [node name="Start Button" type="Button" parent="Online/Lobby"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 946.0
-offset_top = 488.0
-offset_right = 1039.0
-offset_bottom = 519.0
-grow_horizontal = 2
+offset_left = -172.0
+offset_top = -85.0
+offset_right = -72.0
+offset_bottom = -48.0
+grow_horizontal = 0
 grow_vertical = 0
+theme_type_variation = &"PrimaryButton"
 text = "Start game"
 
 [node name="Back Button" type="Button" parent="Online/Lobby"]
@@ -609,288 +650,446 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "OK"
 
-[node name="BackgroundRender" type="Node3D" parent="."]
+[node name="Settings Panel" type="Control" parent="." node_paths=PackedStringArray("music_player", "screen_resolution_options", "fullscreen_toggle", "shader")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_fvurt")
+music_player = NodePath("../Music Player")
+screen_resolution_options = NodePath("Panel/Margin Container/VBoxContainer/Resolution/Screen Resolution Options")
+fullscreen_toggle = NodePath("Panel/Margin Container/VBoxContainer/Fullscreen/Fullscreen Check Button")
+shader = NodePath("../CRTShader")
 
-[node name="Ground" type="StaticBody3D" parent="BackgroundRender"]
+[node name="Panel" type="Panel" parent="Settings Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.0
+offset_top = -180.0
+offset_right = 244.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_8nyf7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4d84c")
+
+[node name="Margin Container" type="MarginContainer" parent="Settings Panel/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.0
+offset_top = -180.0
+offset_right = 244.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_8nyf7")
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings Panel/Panel/Margin Container"]
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="Settings Panel/Panel/Margin Container/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+text = "Settings"
+label_settings = SubResource("LabelSettings_butog")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Volume" type="HBoxContainer" parent="Settings Panel/Panel/Margin Container/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="Settings Panel/Panel/Margin Container/VBoxContainer/Volume"]
+custom_minimum_size = Vector2(104, 0)
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+text = "Volume"
+vertical_alignment = 1
+
+[node name="Volume Slider" type="HSlider" parent="Settings Panel/Panel/Margin Container/VBoxContainer/Volume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("3_8nyf7")
+min_value = -30.0
+max_value = 0.0
+step = 2.0
+value = -14.0
+
+[node name="Fullscreen" type="HBoxContainer" parent="Settings Panel/Panel/Margin Container/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="Settings Panel/Panel/Margin Container/VBoxContainer/Fullscreen"]
+custom_minimum_size = Vector2(104, 0)
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+text = "Fullscreen"
+vertical_alignment = 1
+
+[node name="Fullscreen Check Button" type="CheckButton" parent="Settings Panel/Panel/Margin Container/VBoxContainer/Fullscreen"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("3_8nyf7")
+
+[node name="Resolution" type="HBoxContainer" parent="Settings Panel/Panel/Margin Container/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="Settings Panel/Panel/Margin Container/VBoxContainer/Resolution"]
+custom_minimum_size = Vector2(104, 0)
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+text = "Resolution"
+vertical_alignment = 1
+
+[node name="Screen Resolution Options" type="OptionButton" parent="Settings Panel/Panel/Margin Container/VBoxContainer/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 5
+selected = 3
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1366x768"
+popup/item_2/id = 2
+popup/item_3/text = "1280x720"
+popup/item_3/id = 3
+popup/item_4/text = "960x540"
+popup/item_4/id = 4
+
+[node name="Shader" type="HBoxContainer" parent="Settings Panel/Panel/Margin Container/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="Settings Panel/Panel/Margin Container/VBoxContainer/Shader"]
+custom_minimum_size = Vector2(104, 0)
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+text = "Shader"
+vertical_alignment = 1
+
+[node name="Shader Check Button" type="CheckButton" parent="Settings Panel/Panel/Margin Container/VBoxContainer/Shader"]
+layout_mode = 2
+button_pressed = true
+
+[node name="Button" type="Button" parent="Settings Panel/Panel"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 61.0
+offset_bottom = 45.0
+text = "Back"
+
+[node name="Background Render" type="Node3D" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Background Render"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
-[node name="MeshGround" type="MeshInstance3D" parent="BackgroundRender/Ground"]
+[node name="MeshGround" type="MeshInstance3D" parent="Background Render/Ground"]
 material_override = SubResource("StandardMaterial3D_hsedh")
 mesh = SubResource("PlaneMesh_dkdiq")
 skeleton = NodePath("../..")
 
-[node name="Asset" type="Node3D" parent="BackgroundRender"]
+[node name="Asset" type="Node3D" parent="Background Render"]
 
-[node name="house" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.451279, -9.7925)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house2" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house2" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.582, 0.451279, -9.7925)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house2"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house2"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house2/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house2/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house2/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house2/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house3" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house3" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.17452, 0.451279, -9.7925)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house3"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house3"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house3/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house3/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house3/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house3/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house4" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house4" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59251, 0.451279, -9.7925)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house4"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house4"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house4/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house4/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house4/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house4/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house5" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house5" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.18409, 0.451279, -9.7925)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house5"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house5"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house5/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house5/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house5/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house5/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house6" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house6" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.451279, 10.018)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house6"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house6"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house6/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house6/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house6/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house6/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house7" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house7" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.582, 0.451279, 10.018)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house7"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house7"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house7/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house7/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house7/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house7/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house8" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house8" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.17452, 0.451279, 10.018)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house8"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house8"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house8/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house8/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house8/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house8/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house9" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house9" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.59251, 0.451279, 10.018)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house9"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house9"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house9/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house9/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house9/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house9/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house10" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house10" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.18409, 0.451279, 10.018)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house10"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house10"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house10/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house10/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house10/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house10/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house11" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house11" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-0.000401421, 0, -1, 0, 1, 0, 1, 0, -0.000401421, 9.74296, 0.451279, -0.620543)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house11"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house11"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house11/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house11/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house11/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house11/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house12" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house12" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-0.000401421, 0, -1, 0, 1, 0, 1, 0, -0.000401421, 9.74152, 0.451279, 2.96146)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house12"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house12"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house12/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house12/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house12/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house12/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house13" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house13" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-0.000401421, 0, -1, 0, 1, 0, 1, 0, -0.000401421, 9.74583, 0.451279, -7.79506)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house13"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house13"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house13/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house13/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house13/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house13/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house14" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house14" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-0.000401421, 0, -1, 0, 1, 0, 1, 0, -0.000401421, 9.7444, 0.451279, -4.21305)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house14"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house14"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house14/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house14/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house14/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house14/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house15" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house15" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-0.000401421, 0, -1, 0, 1, 0, 1, 0, -0.000401421, 9.74007, 0.451279, 6.56354)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house15"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house15"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house15/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house15/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house15/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house15/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house16" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house16" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.89761, 0.451279, 0.565291)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house16"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house16"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house16/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house16/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house16/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house16/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house17" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house17" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.89905, 0.451279, 4.14729)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house17"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house17"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house17/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house17/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house17/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house17/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house18" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house18" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.89473, 0.451279, -6.60922)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house18"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house18"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house18/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house18/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house18/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house18/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house19" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house19" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.89617, 0.451279, -3.02722)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house19"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house19"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house19/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house19/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house19/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house19/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="house20" type="StaticBody3D" parent="BackgroundRender/Asset"]
+[node name="house20" type="StaticBody3D" parent="Background Render/Asset"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.9005, 0.451279, 7.74938)
 
-[node name="visual" type="Node3D" parent="BackgroundRender/Asset/house20"]
+[node name="visual" type="Node3D" parent="Background Render/Asset/house20"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
-[node name="RootNode" type="Node3D" parent="BackgroundRender/Asset/house20/visual"]
+[node name="RootNode" type="Node3D" parent="Background Render/Asset/house20/visual"]
 
-[node name="house" type="MeshInstance3D" parent="BackgroundRender/Asset/house20/visual/RootNode"]
+[node name="house" type="MeshInstance3D" parent="Background Render/Asset/house20/visual/RootNode"]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
-[node name="Menu Camera" type="Camera3D" parent="BackgroundRender"]
+[node name="Menu Camera" type="Camera3D" parent="Background Render"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39838, 0)
 current = true
 script = ExtResource("8_s4yhq")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BackgroundRender/Menu Camera"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background Render/Menu Camera"]
 speed_scale = 0.01
 libraries = {
 "": SubResource("AnimationLibrary_vlmh4")
 }
+
+[node name="Music Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_rfo4y")
+volume_db = -26.0
+autoplay = true
 
 [connection signal="pressed" from="Base Menu/Play" to="Base Menu" method="_on_play_pressed"]
 [connection signal="pressed" from="Base Menu/Option" to="Base Menu" method="_on_option_pressed"]
@@ -904,3 +1103,8 @@ libraries = {
 [connection signal="pressed" from="Online/Lobby/Start Button" to="Online" method="_on_start_game_pressed"]
 [connection signal="pressed" from="Online/Lobby/Back Button" to="Online" method="_on_back_button_pressed"]
 [connection signal="pressed" from="Alert Box/Validation button" to="Online" method="_on_validation_button_pressed"]
+[connection signal="value_changed" from="Settings Panel/Panel/Margin Container/VBoxContainer/Volume/Volume Slider" to="Settings Panel" method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="Settings Panel/Panel/Margin Container/VBoxContainer/Fullscreen/Fullscreen Check Button" to="Settings Panel" method="_on_fullscreen_check_button_toggled"]
+[connection signal="item_selected" from="Settings Panel/Panel/Margin Container/VBoxContainer/Resolution/Screen Resolution Options" to="Settings Panel" method="_on_screen_resolution_options_item_selected"]
+[connection signal="toggled" from="Settings Panel/Panel/Margin Container/VBoxContainer/Shader/Shader Check Button" to="Settings Panel" method="_on_shader_check_button_toggled"]
+[connection signal="pressed" from="Settings Panel/Panel/Button" to="Settings Panel" method="_on_button_pressed"]

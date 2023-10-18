@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://wgipu7588bo4"
+path="res://.godot/imported/Shreksophone (Original).mp3-6ad27a6c186e96c937a715795fa78807.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Shreksophone (Original).mp3"
+dest_files=["res://.godot/imported/Shreksophone (Original).mp3-6ad27a6c186e96c937a715795fa78807.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

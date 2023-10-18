@@ -22,7 +22,8 @@ func _on_return_button_pressed():
 
 
 func _input(event):
-	if event is InputEventKey and event.is_action("pause") and event.pressed:
+	if Input.is_action_just_pressed("pause"):
+		print(event)
 		_on_return_button_pressed()
 
 

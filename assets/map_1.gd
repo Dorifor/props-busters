@@ -11,8 +11,6 @@ signal server_disconnected
 
 func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
-
-
 	
 	if not is_multiplayer_authority():
 		return

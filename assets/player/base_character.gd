@@ -58,7 +58,7 @@ func _input(event):
 		camera_rotation.x = clamp(camera_rotation.x, -30, 30)
 		camera_mount.rotation_degrees = camera_rotation
 		
-	if event is InputEventKey and event.is_action("pause"):
+	if Input.is_action_just_released("pause"):
 		pause()
 
 
