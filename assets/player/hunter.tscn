@@ -219,6 +219,7 @@ properties/3/watch = false
 
 [node name="Hunter" type="CharacterBody3D" node_paths=PackedStringArray("bullet_spawn_marker", "animation_tree", "animation_player", "rig", "camera_mount", "camera")]
 collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_rlaiu")
 bullet_scene = ExtResource("2_l18qb")
 bullet_spawn_marker = NodePath("visuals/Character/Bullet Launch")

@@ -25,6 +25,7 @@ mesh = SubResource("SphereMesh_3ubn4")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.00399676, 0.999992, 0, -0.999992, -0.00399676, 0, 0, -0.37151)
+collision_mask = 15
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_6k0er")

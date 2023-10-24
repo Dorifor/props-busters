@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://djdat6cfw3oyc"]
+[gd_scene load_steps=40 format=3 uid="uid://djdat6cfw3oyc"]
 
 [ext_resource type="Script" path="res://assets/map_1.gd" id="1_7kfct"]
 [ext_resource type="Shader" path="res://assets/ui/shader/CRTshader.gdshader" id="2_7rl6p"]
@@ -12,10 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://bhcfxwgtwohhk" path="res://assets/props/prop.tscn" id="9_khxab"]
 [ext_resource type="Script" path="res://assets/custom_spawner.gd" id="12_ef6wd"]
 [ext_resource type="Texture2D" uid="uid://d2pcy41awfbgc" path="res://assets/ground.png" id="13_43n6o"]
-[ext_resource type="PackedScene" uid="uid://dster8131gnji" path="res://assets/props/fire_hydrant.tscn" id="13_kkfj7"]
+[ext_resource type="PackedScene" path="res://assets/props/fire_hydrant.tscn" id="13_kkfj7"]
 [ext_resource type="Texture2D" uid="uid://yyn6t72tjndi" path="res://assets/models/TEX_water.png" id="14_pon82"]
 [ext_resource type="Texture2D" uid="uid://v43gvfriyaoo" path="res://assets/grass.png" id="15_exg2h"]
-[ext_resource type="PackedScene" uid="uid://drpemyofvxta8" path="res://assets/props/phone_box.tscn" id="16_8dp5m"]
+[ext_resource type="PackedScene" path="res://assets/props/phone_box.tscn" id="16_8dp5m"]
+[ext_resource type="PackedScene" uid="uid://dl7tgrlaahein" path="res://assets/player/weapons/bullet.tscn" id="17_dto2l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("2_7rl6p")
@@ -352,5 +353,8 @@ shape = SubResource("ConvexPolygonShape3D_qgguc")
 
 [node name="Prop 2" parent="." instance=ExtResource("16_8dp5m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.8007, 1.2079, 1.2621)
+
+[node name="Bullet" parent="." instance=ExtResource("17_dto2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39474, 0.279715, 2.46207)
 
 [connection signal="server_disconnected" from="." to="." method="_on_server_disconnected"]
