@@ -9,12 +9,18 @@ signal server_disconnected
 @onready var player_list_menu = "res://assets/ui/playerlistmenu/player_list_menu.tscn"
 @export var multiplayer_spawner: MultiplayerSpawner
 
+func mettreAJourVariablePartagee():
+	_on_mettreAJourVariablePartagee.rpc()
+
+@rpc("call_local")
+func _on_mettreAJourVariablePartagee():
+	Globals.NBRPROP += 1
+	
 func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
-	
 	if not is_multiplayer_authority():
 		return
-	
+	$Control.hide()
 	print("MAP 1: ", multiplayer.get_unique_id())
 	await get_tree().process_frame 
 
@@ -31,6 +37,8 @@ func _ready():
 			add_player(player)
 		else:
 			add_prop_player(player)
+			mettreAJourVariablePartagee()
+			
 
 func add_player(peer_id):
 	if not is_multiplayer_authority(): return
@@ -48,3 +56,8 @@ func _on_server_disconnected():
 	Globals.PLAYER_DATA.clear()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file(main_menu_scene)
+	
+
+func _process(delta):
+	if Globals.NBRPROP <= 0:
+		$Control.show()

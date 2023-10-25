@@ -6,6 +6,8 @@ var focused_prop: StaticBody3D = null
 var is_short: bool = false
 var is_ability_available: bool = true
 
+var is_ghost: bool = false
+
 var scale_factor = 1
 var camera_long_distance = 3
 
@@ -20,12 +22,18 @@ var camera_long_distance = 3
 
 
 func _on_bullet_colliding():
-	print("OUCH")
+	if is_ghost == false:
+		is_ghost = true
+		transform_into_ghost()
+	else :
+		UpdateNumberHider()
+		queue_free()
 	# TODO: Kill the player or smth
 
 
 func _ready():
 	super()
+	is_ghost = false
 	if not is_multiplayer_authority(): return
 	interact_ui = get_tree().get_root().get_node("Main Scene/Interact")
 #	position = base_position
@@ -36,19 +44,20 @@ func _input(event):
 	super(event)
 	if not is_multiplayer_authority(): return
 	
-	if is_focusing_prop and event is InputEventKey and event.is_action_pressed("interact"):
+	if is_focusing_prop and event is InputEventKey and event.is_action_pressed("interact") and is_ghost == false:
 		transform_into_prop()
 		disable_power(true)
 	
-	if event is InputEventKey and event.is_action("shortening") and not is_short and is_ability_available:
+	if event is InputEventKey and event.is_action("shortening") and not is_short and is_ability_available and is_ghost == false:
 		activate_power()
 
 
 func _process(_delta):
 	super(_delta)
+	
 	if not is_multiplayer_authority(): return
 	
-	if raycast.is_colliding():
+	if raycast.is_colliding() and is_ghost == false:
 		var collider = raycast.get_collider()
 		if collider is StaticBody3D:
 			interact_ui.visible = true
@@ -132,3 +141,21 @@ func _on_ability_timer_timeout():
 
 func _on_ability_cooldown_timeout():
 	is_ability_available = true
+	
+
+func transform_into_ghost():
+	$Visuals/Mesh.hide()
+	$Visuals/MESH_Ghost.show()
+	$GhostWaitTime.start()
+
+func _on_ghost_wait_time_timeout():
+	is_ghost = false
+	$Visuals/Mesh.show()
+	$Visuals/MESH_Ghost.hide()
+
+func UpdateNumberHider():
+	_on_UpdateNumberHiderOnline.rpc()
+
+@rpc("call_local")
+func _on_UpdateNumberHiderOnline():
+	Globals.NBRPROP -= 1

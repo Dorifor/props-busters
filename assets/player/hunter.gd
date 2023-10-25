@@ -31,6 +31,7 @@ func _input(event):
 
 func _process(delta):
 	super(delta)
+	
 	if not is_multiplayer_authority(): return
 	if Globals.IS_GAME_PAUSED: return
 	
@@ -44,6 +45,9 @@ func _process(delta):
 
 @rpc("call_local")
 func shoot():
+	
+	print("MAP 1: ", multiplayer.get_unique_id())
+	print(Globals.NBRPROP)
 	var bullet = bullet_scene.instantiate()
 	get_parent().add_child(bullet)
 	

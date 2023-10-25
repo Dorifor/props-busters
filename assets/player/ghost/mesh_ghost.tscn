@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bklig6xk7tfdg"]
+
+[node name="mesh_ghost" type="Node2D"]

@@ -24,9 +24,9 @@ shader_parameter/white_noise_rate = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6muyn"]
 shader = ExtResource("1_6g2t5")
-shader_parameter/crt_curve = 0.01
+shader_parameter/crt_curve = 0.0
 shader_parameter/crt_scan_line_color = 0.0
-shader_parameter/aperture_grille_rate = 0.0
+shader_parameter/aperture_grille_rate = 0.3
 shader_parameter/rf_switch_esque_blur = 0.0
 shader_parameter/white_noise_rate = 0.0
 

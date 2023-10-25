@@ -7,3 +7,5 @@ extends Node
 
 @export var PLAYER_DATA = {}
 @export var ID_CURRENTPLAYER = 0
+
+@export var NBRPROP = 0

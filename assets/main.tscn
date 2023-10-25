@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://djdat6cfw3oyc"]
+[gd_scene load_steps=41 format=3 uid="uid://djdat6cfw3oyc"]
 
 [ext_resource type="Script" path="res://assets/map_1.gd" id="1_7kfct"]
 [ext_resource type="Shader" path="res://assets/ui/shader/CRTshader.gdshader" id="2_7rl6p"]
@@ -16,7 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://yyn6t72tjndi" path="res://assets/models/TEX_water.png" id="14_pon82"]
 [ext_resource type="Texture2D" uid="uid://v43gvfriyaoo" path="res://assets/grass.png" id="15_exg2h"]
 [ext_resource type="PackedScene" path="res://assets/props/phone_box.tscn" id="16_8dp5m"]
-[ext_resource type="PackedScene" uid="uid://dl7tgrlaahein" path="res://assets/player/weapons/bullet.tscn" id="17_dto2l"]
+[ext_resource type="PackedScene" uid="uid://cs2kb11oqhp26" path="res://assets/models/house.fbx" id="16_id1rd"]
+[ext_resource type="PackedScene" uid="uid://bpxstamhmo347" path="res://assets/player/finalscreen/finalscreen.tscn" id="18_yalyq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("2_7rl6p")
@@ -28,9 +29,9 @@ shader_parameter/white_noise_rate = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yk6t1"]
 shader = ExtResource("2_7rl6p")
-shader_parameter/crt_curve = 0.01
+shader_parameter/crt_curve = 0.0
 shader_parameter/crt_scan_line_color = 0.0
-shader_parameter/aperture_grille_rate = 0.0
+shader_parameter/aperture_grille_rate = 0.3
 shader_parameter/rf_switch_esque_blur = 0.0
 shader_parameter/white_noise_rate = 0.0
 
@@ -341,7 +342,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_5xwj2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.2289, 0, -0.365139)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14419, -0.462587, -51.0085)
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Static/StaticBody3D"]
@@ -351,10 +352,35 @@ mesh = SubResource("CylinderMesh_swxuv")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Static/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_qgguc")
 
+[node name="house" parent="Static" instance=ExtResource("16_id1rd")]
+transform = Transform3D(-0.6, 0, -9.05975e-08, 0, 0.6, 0, 9.05975e-08, 0, -0.6, 11.5979, 1.80174, -29.7093)
+
+[node name="house 2" parent="Static" instance=ExtResource("16_id1rd")]
+transform = Transform3D(-0.6, 0, -9.05975e-08, 0, 0.6, 0, 9.05975e-08, 0, -0.6, -2.80501, 1.80174, -29.7093)
+
+[node name="bridge(1) 2" type="StaticBody3D" parent="Static"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.5221, 0.285989, -25.032)
+
+[node name="polySurface3" type="MeshInstance3D" parent="Static/bridge(1) 2"]
+material_override = SubResource("StandardMaterial3D_b8kbu")
+mesh = SubResource("ArrayMesh_mnld3")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Static/bridge(1) 2/polySurface3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Static/bridge(1) 2/polySurface3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_5xwj2")
+
+[node name="house 3" parent="Static" instance=ExtResource("16_id1rd")]
+transform = Transform3D(-0.6, 0, -9.05975e-08, 0, 0.6, 0, 9.05975e-08, 0, -0.6, 11.5979, 1.80174, -29.7093)
+
+[node name="house 4" parent="Static" instance=ExtResource("16_id1rd")]
+transform = Transform3D(-0.6, 0, -9.05975e-08, 0, 0.6, 0, 9.05975e-08, 0, -0.6, -2.80501, 1.80174, -29.7093)
+
 [node name="Prop 2" parent="." instance=ExtResource("16_8dp5m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.8007, 1.2079, 1.2621)
 
-[node name="Bullet" parent="." instance=ExtResource("17_dto2l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39474, 0.279715, 2.46207)
+[node name="Control" parent="." instance=ExtResource("18_yalyq")]
+visible = false
 
 [connection signal="server_disconnected" from="." to="." method="_on_server_disconnected"]
