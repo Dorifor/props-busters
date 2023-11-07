@@ -7,7 +7,7 @@ uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, repeat_disable, filter_n
 // ブラウン管のガラスの曲がり具合（フラットなやつは0.0でいいかな）
 uniform float crt_curve : hint_range( 0.0, 1.0 ) = 0.02;
 // 走査線の濃さ
-uniform float crt_scan_line_color : hint_range( 0.0, 1.0 ) = 0.347;
+uniform float crt_scan_line_color : hint_range( 0.0, 1.0 ) = 0.0;
 // 光量
 uniform float aperture_grille_rate : hint_range( 0.0, 1.0 ) = 0.4;
 // RFスイッチ的ブラー
@@ -44,7 +44,6 @@ void fragment( )
 			*	( rf_switch_esque_blur * 0.25 )	// （RFノイズ）0.5 * （テクスチャから読んだ2箇所を半分にしたい）0.5
 		)
 	) * enable_color;
-	COLOR.a = 1.0;
 
 	// ------------------------------------------------
 	// 以下はアパーチャグリル上の1ピクセルごとの処理

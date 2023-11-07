@@ -1,6 +1,6 @@
-[gd_scene load_steps=35 format=3 uid="uid://bbua5yo0dvsfs"]
+[gd_scene load_steps=33 format=3 uid="uid://bbua5yo0dvsfs"]
 
-[ext_resource type="Shader" path="res://assets/ui/shader/CRTshader.gdshader" id="1_6g2t5"]
+[ext_resource type="Shader" path="res://assets/ui/main menu/psx_post_proc.gdshader" id="1_jncoj"]
 [ext_resource type="Script" path="res://assets/ui/main menu/base_menu.gd" id="2_jf80g"]
 [ext_resource type="Theme" uid="uid://rry0vxdb3l3k" path="res://assets/ui/styles/main_menu_theme.tres" id="3_8nyf7"]
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="3_cs8je"]
@@ -14,21 +14,9 @@
 [ext_resource type="Script" path="res://assets/ui/main menu/settings_panel.gd" id="10_fvurt"]
 [ext_resource type="AudioStream" uid="uid://wgipu7588bo4" path="res://assets/sounds/Shreksophone (Original).mp3" id="13_rfo4y"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pmbes"]
-shader = ExtResource("1_6g2t5")
-shader_parameter/crt_curve = 0.6
-shader_parameter/crt_scan_line_color = 0.559
-shader_parameter/aperture_grille_rate = 0.4
-shader_parameter/rf_switch_esque_blur = 1.0
-shader_parameter/white_noise_rate = 0.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6muyn"]
-shader = ExtResource("1_6g2t5")
-shader_parameter/crt_curve = 0.01
-shader_parameter/crt_scan_line_color = 0.0
-shader_parameter/aperture_grille_rate = 0.0
-shader_parameter/rf_switch_esque_blur = 0.0
-shader_parameter/white_noise_rate = 0.0
+shader = ExtResource("1_jncoj")
+shader_parameter/opacity = 0.4
 
 [sub_resource type="LabelSettings" id="LabelSettings_qx6wc"]
 font = ExtResource("4_lbp0i")
@@ -37,13 +25,6 @@ font_size = 48
 [sub_resource type="LabelSettings" id="LabelSettings_16xff"]
 font = ExtResource("5_p76oq")
 font_size = 24
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4d84c"]
-bg_color = Color(0.176471, 0.207843, 0.223529, 0.988235)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="LabelSettings" id="LabelSettings_butog"]
 font_size = 32
@@ -343,22 +324,9 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_vertical_guides_ = []
 
-[node name="CRTShader" type="Control" parent="."]
-visible = false
-clip_children = 1
-z_index = 4096
-z_as_relative = false
-material = SubResource("ShaderMaterial_pmbes")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="CRTShader"]
+[node name="Shader" type="ColorRect" parent="."]
 light_mask = 0
+z_index = 1
 material = SubResource("ShaderMaterial_6muyn")
 layout_mode = 1
 anchors_preset = 15
@@ -650,8 +618,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "OK"
 
-[node name="Settings Panel" type="Control" parent="." node_paths=PackedStringArray("music_player", "screen_resolution_options", "fullscreen_toggle", "shader")]
-visible = false
+[node name="Settings Panel" type="Control" parent="." node_paths=PackedStringArray("music_player", "volume_slider", "screen_resolution_options", "fullscreen_toggle", "shader_toggle", "shader")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -660,9 +627,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_fvurt")
 music_player = NodePath("../Music Player")
+volume_slider = NodePath("Panel/Margin Container/VBoxContainer/Volume/Volume Slider")
 screen_resolution_options = NodePath("Panel/Margin Container/VBoxContainer/Resolution/Screen Resolution Options")
 fullscreen_toggle = NodePath("Panel/Margin Container/VBoxContainer/Fullscreen/Fullscreen Check Button")
-shader = NodePath("../CRTShader")
+shader_toggle = NodePath("Panel/Margin Container/VBoxContainer/Shader/Shader Check Button")
+shader = NodePath("../Shader")
 
 [node name="Panel" type="Panel" parent="Settings Panel"]
 layout_mode = 1
@@ -674,23 +643,16 @@ anchor_bottom = 0.5
 offset_left = -244.0
 offset_top = -180.0
 offset_right = 244.0
-offset_bottom = 180.0
+offset_bottom = 87.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_8nyf7")
-theme_override_styles/panel = SubResource("StyleBoxFlat_4d84c")
 
 [node name="Margin Container" type="MarginContainer" parent="Settings Panel/Panel"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -244.0
-offset_top = -180.0
-offset_right = 244.0
-offset_bottom = 180.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_8nyf7")

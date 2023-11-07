@@ -32,6 +32,7 @@ func _ready():
 		else:
 			add_prop_player(player)
 
+
 func add_player(peer_id):
 	if not is_multiplayer_authority(): return
 	multiplayer_spawner.spawn({ "peer_id": peer_id, "player_type": Constants.PlayerType.HUNTER_TYPE })

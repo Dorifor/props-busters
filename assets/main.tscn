@@ -1,11 +1,11 @@
-[gd_scene load_steps=39 format=3 uid="uid://djdat6cfw3oyc"]
+[gd_scene load_steps=38 format=3 uid="uid://djdat6cfw3oyc"]
 
 [ext_resource type="Script" path="res://assets/map_1.gd" id="1_7kfct"]
-[ext_resource type="Shader" path="res://assets/ui/shader/CRTshader.gdshader" id="2_7rl6p"]
 [ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/interact.tscn" id="2_jr3q3"]
 [ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/hunter.tscn" id="2_x28bk"]
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_abh5i"]
 [ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="3_xhk2i"]
+[ext_resource type="Shader" path="res://assets/ui/main menu/psx_post_proc.gdshader" id="4_gyrl8"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_8fnkr"]
 [ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/trashcan.tscn" id="8_5qy7n"]
 [ext_resource type="PackedScene" uid="uid://buq0vob7sl6lb" path="res://assets/props/lamp.tscn" id="8_y5anu"]
@@ -17,21 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://v43gvfriyaoo" path="res://assets/grass.png" id="15_exg2h"]
 [ext_resource type="PackedScene" uid="uid://drpemyofvxta8" path="res://assets/props/phone_box.tscn" id="16_8dp5m"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
-shader = ExtResource("2_7rl6p")
-shader_parameter/crt_curve = 0.923
-shader_parameter/crt_scan_line_color = 0.686
-shader_parameter/aperture_grille_rate = 0.4
-shader_parameter/rf_switch_esque_blur = 1.0
-shader_parameter/white_noise_rate = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yk6t1"]
-shader = ExtResource("2_7rl6p")
-shader_parameter/crt_curve = 0.01
-shader_parameter/crt_scan_line_color = 0.0
-shader_parameter/aperture_grille_rate = 0.0
-shader_parameter/rf_switch_esque_blur = 0.0
-shader_parameter/white_noise_rate = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_51132"]
+shader = ExtResource("4_gyrl8")
+shader_parameter/opacity = 0.4
 
 [sub_resource type="BoxMesh" id="BoxMesh_wuvno"]
 size = Vector3(1, 0.2, 1)
@@ -198,21 +186,10 @@ spawn_path_follow = NodePath("SpawnPath/PathFollow3D")
 multiplayer_spawner = NodePath("MultiplayerSpawner")
 metadata/_edit_vertical_guides_ = []
 
-[node name="CRTShader" type="Control" parent="."]
-clip_children = 1
-material = SubResource("ShaderMaterial_gbaxg")
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="CRTShader"]
+[node name="Shader" type="ColorRect" parent="."]
 light_mask = 0
-material = SubResource("ShaderMaterial_yk6t1")
-layout_mode = 1
+z_index = 1
+material = SubResource("ShaderMaterial_51132")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -222,11 +199,15 @@ grow_vertical = 2
 [node name="Interact" parent="." instance=ExtResource("2_jr3q3")]
 visible = false
 
-[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
-process_mode = 0
+[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player", "volume_slider", "shader") instance=ExtResource("3_abh5i")]
 visible = false
 z_index = -1
 music_player = NodePath("../Music Player")
+volume_slider = NodePath("VBoxContainer/Volume/Volume Slider")
+shader = NodePath("../Shader")
+
+[node name="Background" parent="Pause Menu" index="0"]
+modulate = Color(1, 1, 1, 0.807843)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -1.47514e-07, -0.707106, 0.612372, 0.5, 0.612373, 0.353553, -0.866025, 0.353554, -3.33941, 4.3379, 2.33659)
@@ -354,3 +335,5 @@ shape = SubResource("ConvexPolygonShape3D_qgguc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.8007, 1.2079, 1.2621)
 
 [connection signal="server_disconnected" from="." to="." method="_on_server_disconnected"]
+
+[editable path="Pause Menu"]

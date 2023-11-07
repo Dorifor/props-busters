@@ -1,26 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://88yv727qgtc4"]
+[gd_scene load_steps=4 format=3 uid="uid://88yv727qgtc4"]
 
+[ext_resource type="Theme" uid="uid://rry0vxdb3l3k" path="res://assets/ui/styles/main_menu_theme.tres" id="1_bayul"]
 [ext_resource type="Script" path="res://assets/ui/pause menu/pause_menu_manager.gd" id="1_dcvul"]
-[ext_resource type="Theme" uid="uid://dxs16nfa1bvuo" path="res://assets/ui/styles/basic_theme.tres" id="2_8kkx6"]
-[ext_resource type="StyleBox" uid="uid://cc1f4h78vi2h" path="res://assets/ui/styles/button_red.tres" id="3_2d45u"]
-[ext_resource type="StyleBox" uid="uid://b7m3eco1oujqm" path="res://assets/ui/styles/button_red_hover.tres" id="4_bp3vl"]
-[ext_resource type="StyleBox" uid="uid://cnt2xr5tgk1jd" path="res://assets/ui/styles/button_red_pressed.tres" id="5_sbqsf"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf0e0"]
-bg_color = Color(0, 0, 0, 0.619608)
 
 [sub_resource type="LabelSettings" id="LabelSettings_butog"]
 font_size = 32
 
-[node name="Pause Menu" type="Control"]
-process_mode = 2
+[node name="Pause Menu" type="Control" node_paths=PackedStringArray("volume_slider", "screen_resolution_options", "fullscreen_toggle", "shader_toggle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_bayul")
 script = ExtResource("1_dcvul")
+volume_slider = NodePath("VBoxContainer/Volume/Volume Slider")
+screen_resolution_options = NodePath("VBoxContainer/Resolution/Screen Resolution Options")
+fullscreen_toggle = NodePath("VBoxContainer/Fullscreen/Fullscreen Check Button")
+shader_toggle = NodePath("VBoxContainer/Shader/Shader Check Button")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
@@ -29,7 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_wf0e0")
+theme = ExtResource("1_bayul")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -38,16 +36,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.5
-offset_top = -41.5
-offset_right = 50.5
-offset_bottom = 41.5
+offset_left = -161.0
+offset_top = -162.0
+offset_right = 161.0
+offset_bottom = 163.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_bayul")
 theme_override_constants/separation = 15
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_bayul")
 text = "PAUSE"
 label_settings = SubResource("LabelSettings_butog")
 horizontal_alignment = 1
@@ -55,6 +55,7 @@ vertical_alignment = 1
 
 [node name="Horizontal Sensibility" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_bayul")
 
 [node name="Horizontal Label" type="Label" parent="VBoxContainer/Horizontal Sensibility"]
 layout_mode = 2
@@ -70,6 +71,7 @@ value = 0.2
 
 [node name="Vertical Sensibility" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_bayul")
 
 [node name="Vertical Label" type="Label" parent="VBoxContainer/Vertical Sensibility"]
 layout_mode = 2
@@ -85,6 +87,7 @@ value = 0.1
 
 [node name="Volume" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_bayul")
 
 [node name="Volume Label" type="Label" parent="VBoxContainer/Volume"]
 layout_mode = 2
@@ -94,25 +97,90 @@ vertical_alignment = 1
 
 [node name="Volume Slider" type="HSlider" parent="VBoxContainer/Volume"]
 layout_mode = 2
-min_value = -50.0
-max_value = -20.0
+min_value = -30.0
+max_value = 0.0
 step = 2.0
-value = -34.0
+value = -14.0
+
+[node name="Fullscreen" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_bayul")
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="VBoxContainer/Fullscreen"]
+custom_minimum_size = Vector2(104, 0)
+layout_mode = 2
+theme = ExtResource("1_bayul")
+text = "Fullscreen"
+vertical_alignment = 1
+
+[node name="Fullscreen Check Button" type="CheckButton" parent="VBoxContainer/Fullscreen"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("1_bayul")
+
+[node name="Resolution" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_bayul")
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="VBoxContainer/Resolution"]
+custom_minimum_size = Vector2(104, 0)
+layout_mode = 2
+theme = ExtResource("1_bayul")
+text = "Resolution"
+vertical_alignment = 1
+
+[node name="Screen Resolution Options" type="OptionButton" parent="VBoxContainer/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 5
+selected = 3
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1366x768"
+popup/item_2/id = 2
+popup/item_3/text = "1280x720"
+popup/item_3/id = 3
+popup/item_4/text = "960x540"
+popup/item_4/id = 4
+
+[node name="Shader" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_bayul")
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="VBoxContainer/Shader"]
+custom_minimum_size = Vector2(104, 0)
+layout_mode = 2
+theme = ExtResource("1_bayul")
+text = "Shader"
+vertical_alignment = 1
+
+[node name="Shader Check Button" type="CheckButton" parent="VBoxContainer/Shader"]
+layout_mode = 2
+theme = ExtResource("1_bayul")
+button_pressed = true
 
 [node name="Return Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("2_8kkx6")
+theme = ExtResource("1_bayul")
+theme_type_variation = &"MainMenuButton"
 text = "RETURN"
 
 [node name="Quit Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("3_2d45u")
-theme_override_styles/hover = ExtResource("4_bp3vl")
-theme_override_styles/pressed = ExtResource("5_sbqsf")
+theme = ExtResource("1_bayul")
+theme_type_variation = &"PrimaryButton"
 text = "QUIT GAME"
 
 [connection signal="value_changed" from="VBoxContainer/Horizontal Sensibility/Horizontal Slider" to="." method="_on_horizontal_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/Vertical Sensibility/Vertical Slider" to="." method="_on_vertical_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/Volume/Volume Slider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/Fullscreen/Fullscreen Check Button" to="." method="_on_fullscreen_check_button_toggled"]
+[connection signal="item_selected" from="VBoxContainer/Resolution/Screen Resolution Options" to="." method="_on_screen_resolution_options_item_selected"]
+[connection signal="toggled" from="VBoxContainer/Shader/Shader Check Button" to="." method="_on_shader_check_button_toggled"]
 [connection signal="pressed" from="VBoxContainer/Return Button" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit Button" to="." method="_on_quit_button_pressed"]
