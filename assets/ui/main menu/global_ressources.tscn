@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckndt3ocbk73v"]
+
+[ext_resource type="Script" path="res://assets/ui/main menu/global_ressources.gd" id="1_kaa8n"]
+[ext_resource type="PackedScene" uid="uid://du1am3r08n0lw" path="res://assets/ui/playerlistmenu/player_list_menu.tscn" id="2_e3qib"]
+
+[node name="Global Ressources" type="Node"]
+script = ExtResource("1_kaa8n")
+player_list_scene = ExtResource("2_e3qib")

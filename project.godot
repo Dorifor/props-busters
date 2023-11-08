@@ -20,6 +20,7 @@ config/icon="res://assets/icon.svg"
 
 Globals="*res://assets/globals.gd"
 Constants="*res://assets/constants.gd"
+GlobalRessources="*res://assets/ui/main menu/global_ressources.tscn"
 
 [display]
 

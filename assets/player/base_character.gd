@@ -12,12 +12,12 @@ class_name BaseCharacter
 
 @export var pause_menu: Control
 
-var lockRotate = false
+var rotation_locked = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var base_position: Vector3
 
-var playerlistload
+var player_list: Control
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
@@ -29,10 +29,9 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	pause_menu = get_tree().get_root().get_node("Main Scene/Pause Menu")
 	
-	var playerlist = load("res://assets/ui/playerlistmenu/player_list_menu.tscn")
-	playerlistload = playerlist.instantiate()
-	add_child(playerlistload)
-	playerlistload.visible = false
+	player_list = GlobalRessources.player_list_scene.instantiate()
+	add_child(player_list)
+	player_list.visible = false
 
 
 func _input(event):
@@ -43,14 +42,16 @@ func _input(event):
 	var vertical_sens = Globals.VERTICAL_SENSIBILITY_VALUE 
 	
 	if Input.is_action_just_pressed("tab"):
-			playerlistload.show()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		player_list.show()
 	if Input.is_action_just_released("tab"):
-			playerlistload.hide()
-		
-	if event is InputEventMouseMotion:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		player_list.hide()
+	
+	if event is InputEventMouseMotion and !player_list.visible:
 		rotate_y(deg_to_rad(-event.relative.x * horizontal_sens))
 		
-		if !lockRotate:
+		if !rotation_locked:
 			rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
 		
 		camera_mount.rotate_x((deg_to_rad(-event.relative.y * vertical_sens)))
@@ -90,7 +91,7 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
-		if !lockRotate:
+		if !rotation_locked:
 			rig.look_at(position + -direction)
 		else:
 			rig.rotation = Vector3(0, 160, 0)
@@ -98,7 +99,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
-		if lockRotate:
+		if rotation_locked:
 			rig.rotation = Vector3(0, 160, 0)
 
 	move_and_slide()

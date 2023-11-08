@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=3 uid="uid://me5vdxwq1hsv"]
 
 [ext_resource type="Shader" path="res://assets/ui/shader/CRTshader.gdshader" id="1_prvcv"]
-[ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/interact.tscn" id="2_uydor"]
+[ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/hider_gui.tscn" id="2_uydor"]
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_qavpe"]
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="4_ooqws"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_kyepd"]

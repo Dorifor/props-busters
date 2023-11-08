@@ -18,7 +18,9 @@ var camera_long_distance = 3
 @export var hider_mesh: MeshInstance3D
 @export var hider_collision: CollisionShape3D
 
+@export var hider_ui: Control
 @export var interact_ui: Control
+@export var ability_progress_bar: TextureProgressBar
 
 
 func _on_bullet_colliding():
@@ -35,9 +37,7 @@ func _ready():
 	super()
 	is_ghost = false
 	if not is_multiplayer_authority(): return
-	interact_ui = get_tree().get_root().get_node("Main Scene/Interact")
-#	position = base_position
-	print("position: ", multiplayer.get_unique_id(), " ", position)
+	hider_ui.show()
 
 
 func _input(event):
@@ -109,8 +109,21 @@ func transform_into_prop():
 	propage_prop_change.rpc(prop_change_payload)
 
 
+func start_ability_timeout_progress():
+	if not is_multiplayer_authority(): return
+	var tween = get_tree().create_tween()
+	tween.tween_property(ability_progress_bar, "value", 0, ability_timer.wait_time)
+
+
+func start_ability_cooldown_progress():
+	if not is_multiplayer_authority(): return
+	var tween = get_tree().create_tween()
+	tween.tween_property(ability_progress_bar, "value", 100, ability_cooldown_timer.wait_time)
+
+
 func activate_power():
 	if not is_multiplayer_authority(): return
+	start_ability_timeout_progress()
 	
 	is_short = true
 	scale /= 2
@@ -127,12 +140,15 @@ func disable_power(just_transformed: bool = false):
 	if not is_short: return
 	ability_timer.stop()
 	ability_cooldown_timer.start()
+	start_ability_cooldown_progress()
 	is_short = false
 	speed_factor = 1
 	camera.position.y -= 3
 	camera.position.z -= 3
 	if just_transformed: return
 	scale *= 2
+	# center origin, so clipping when scaling back, need to translate half size
+	position.y += hider_mesh.get_aabb().size.y / 3
 
 
 func _on_ability_timer_timeout():
@@ -141,7 +157,7 @@ func _on_ability_timer_timeout():
 
 func _on_ability_cooldown_timeout():
 	is_ability_available = true
-	
+
 
 func transform_into_ghost():
 	$Visuals/Mesh.hide()

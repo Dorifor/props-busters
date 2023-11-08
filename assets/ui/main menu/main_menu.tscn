@@ -619,6 +619,7 @@ grow_vertical = 2
 text = "OK"
 
 [node name="Settings Panel" type="Control" parent="." node_paths=PackedStringArray("music_player", "volume_slider", "screen_resolution_options", "fullscreen_toggle", "shader_toggle", "shader")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

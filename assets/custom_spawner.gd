@@ -18,7 +18,5 @@ func _spawn_custom(data: Variant) -> Node:
 		player = hunter_scene.instantiate() as Hunter
 	player.name = str(data.peer_id)
 	player.position = spawn_path_follow.position
-	print("[%s] player %s added" % [multiplayer.get_unique_id(), data.peer_id])
-	print("[%s] player details: %s" % [multiplayer.get_unique_id(), str(player)])
 	
 	return player

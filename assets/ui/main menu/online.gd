@@ -119,7 +119,7 @@ func _register_player(new_player_info):
 
 func _on_player_disconnected(id):
 	players.erase(id)
-	# player_disconnected.emit(id)
+#	player_disconnected.emit(id)
 
 
 func _on_connected_ok():

@@ -20,13 +20,13 @@ func _input(event):
 		aim.visible = true
 		#camera.position = Vector3(0.46,1.79,0.42)
 		camera.position = Vector3(0.659,1.791,0.62)
-		lockRotate = true;
+		rotation_locked = true;
 		if Input.is_action_just_pressed("attack"):
 			shoot.rpc()
 	else :
 		aim.visible = false
 		camera.position = Vector3(0.46,2.47,2.10)
-		lockRotate = false;
+		rotation_locked = false;
 		
 
 func _process(delta):

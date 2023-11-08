@@ -12,3 +12,5 @@ extends Node
 @export var ID_CURRENTPLAYER = 0
 
 @export var NBRPROP = 0
+
+@export var FORCE_HIDER_SINGLE_PLAYER = true

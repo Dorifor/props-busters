@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ds0nq6bl4doee"]
+[gd_scene load_steps=10 format=3 uid="uid://ds0nq6bl4doee"]
 
 [ext_resource type="Script" path="res://assets/player/hider/hider.gd" id="1_ycexa"]
+[ext_resource type="Script" path="res://assets/player/hider/raycast_ignore_parent.gd" id="2_ucxxu"]
+[ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/hider_gui.tscn" id="3_u67o6"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fq0un"]
 radius = 0.1
@@ -67,7 +69,7 @@ properties/3/spawn = true
 properties/3/sync = true
 properties/3/watch = false
 
-[node name="Hider" type="CharacterBody3D" node_paths=PackedStringArray("raycast", "ability_timer", "ability_cooldown_timer", "hider_mesh", "hider_collision", "rig", "camera_mount", "camera")]
+[node name="Hider" type="CharacterBody3D" node_paths=PackedStringArray("raycast", "ability_timer", "ability_cooldown_timer", "hider_mesh", "hider_collision", "hider_ui", "interact_ui", "ability_progress_bar", "rig", "camera_mount", "camera")]
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_ycexa")
@@ -76,9 +78,19 @@ ability_timer = NodePath("Ability Timer")
 ability_cooldown_timer = NodePath("Ability Cooldown")
 hider_mesh = NodePath("Visuals/Mesh")
 hider_collision = NodePath("Collision")
+hider_ui = NodePath("Hider UI")
+interact_ui = NodePath("Hider UI/Interact Label")
+ability_progress_bar = NodePath("Hider UI/Ability Progress Bar")
 rig = NodePath("Visuals")
 camera_mount = NodePath("Camera Mount")
 camera = NodePath("Camera Mount/Camera3D")
+
+[node name="Hider UI" parent="." instance=ExtResource("3_u67o6")]
+visible = false
+mouse_filter = 2
+
+[node name="Interact Label" parent="Hider UI" index="0"]
+visible = false
 
 [node name="Visuals" type="Node3D" parent="."]
 
@@ -97,12 +109,13 @@ skeleton = NodePath("")
 [node name="Camera3D" type="Camera3D" parent="Camera Mount"]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.07875, 1.10113)
 
-[node name="Props Raycast" type="RayCast3D" parent="Camera Mount/Camera3D"]
+[node name="Props Raycast" type="RayCast3D" parent="Camera Mount/Camera3D" node_paths=PackedStringArray("excluded_colliders")]
 transform = Transform3D(1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, 0, 0)
-target_position = Vector3(0, -3, 0)
+target_position = Vector3(0, -3.5, 0)
 collision_mask = 4
-debug_shape_custom_color = Color(1, 0, 0, 1)
-debug_shape_thickness = 5
+debug_shape_custom_color = Color(1, 0, 0, 0.00392157)
+script = ExtResource("2_ucxxu")
+excluded_colliders = [NodePath("../../..")]
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.254186, 0)
@@ -125,3 +138,5 @@ replication_config = SubResource("SceneReplicationConfig_wygno")
 [connection signal="timeout" from="Ability Timer" to="." method="_on_ability_timer_timeout"]
 [connection signal="timeout" from="Ability Cooldown" to="." method="_on_ability_cooldown_timeout"]
 [connection signal="timeout" from="GhostWaitTime" to="." method="_on_ghost_wait_time_timeout"]
+
+[editable path="Hider UI"]

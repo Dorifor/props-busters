@@ -1,7 +1,6 @@
-[gd_scene load_steps=38 format=3 uid="uid://djdat6cfw3oyc"]
+[gd_scene load_steps=37 format=3 uid="uid://djdat6cfw3oyc"]
 
 [ext_resource type="Script" path="res://assets/map_1.gd" id="1_7kfct"]
-[ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/interact.tscn" id="2_jr3q3"]
 [ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/hunter.tscn" id="2_x28bk"]
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_abh5i"]
 [ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="3_xhk2i"]
@@ -186,6 +185,17 @@ spawn_path_follow = NodePath("SpawnPath/PathFollow3D")
 multiplayer_spawner = NodePath("MultiplayerSpawner")
 metadata/_edit_vertical_guides_ = []
 
+[node name="Music Player" parent="." instance=ExtResource("5_8fnkr")]
+process_mode = 3
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." node_paths=PackedStringArray("spawn_path_follow")]
+_spawnable_scenes = PackedStringArray("res://assets/player/hider/hider.tscn", "res://assets/player/hunter.tscn")
+spawn_path = NodePath("..")
+script = ExtResource("12_ef6wd")
+hider_scene = ExtResource("3_xhk2i")
+hunter_scene = ExtResource("2_x28bk")
+spawn_path_follow = NodePath("../SpawnPath/PathFollow3D")
+
 [node name="Shader" type="ColorRect" parent="."]
 light_mask = 0
 z_index = 1
@@ -196,14 +206,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Interact" parent="." instance=ExtResource("2_jr3q3")]
-visible = false
-
-[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player", "volume_slider", "shader") instance=ExtResource("3_abh5i")]
+[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player", "shader") instance=ExtResource("3_abh5i")]
 visible = false
 z_index = -1
 music_player = NodePath("../Music Player")
-volume_slider = NodePath("VBoxContainer/Volume/Volume Slider")
 shader = NodePath("../Shader")
 
 [node name="Background" parent="Pause Menu" index="0"]
@@ -226,9 +232,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_byqca")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.1, 0)
 shape = SubResource("BoxShape3D_hth55")
 
-[node name="Music Player" parent="." instance=ExtResource("5_8fnkr")]
-process_mode = 3
-
 [node name="Trashcan" parent="." instance=ExtResource("8_5qy7n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.66496, 0.255914, 0)
 
@@ -248,14 +251,6 @@ curve = SubResource("Curve3D_h6g16")
 [node name="PathFollow3D" type="PathFollow3D" parent="SpawnPath"]
 transform = Transform3D(-0.0129187, 0, 0.999902, 0, 1, 0, -0.999902, 0, -0.0129187, 2.96606, 0, 4.12079)
 progress = 18.6126
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." node_paths=PackedStringArray("spawn_path_follow")]
-_spawnable_scenes = PackedStringArray("res://assets/player/hider/hider.tscn", "res://assets/player/hunter.tscn")
-spawn_path = NodePath("..")
-script = ExtResource("12_ef6wd")
-hider_scene = ExtResource("3_xhk2i")
-hunter_scene = ExtResource("2_x28bk")
-spawn_path_follow = NodePath("../SpawnPath/PathFollow3D")
 
 [node name="Spawn1" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54026, 0.999999, -1.65113)
