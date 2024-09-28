@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bcahb44pe7hvk" path="res://assets/ui/icons/settings.svg" id="7_0tden"]
 [ext_resource type="Texture2D" uid="uid://c0hckfoffbqes" path="res://assets/ui/icons/quit.svg" id="8_68dq3"]
 [ext_resource type="Script" path="res://assets/ui/main menu/menu_camera.gd" id="8_s4yhq"]
+[ext_resource type="PackedScene" uid="uid://djdat6cfw3oyc" path="res://assets/scenes/main.tscn" id="10_7ogl0"]
 [ext_resource type="Script" path="res://assets/ui/main menu/settings_panel.gd" id="10_fvurt"]
-[ext_resource type="PackedScene" uid="uid://djdat6cfw3oyc" path="res://assets/scenes/main.tscn" id="10_im1nl"]
 [ext_resource type="AudioStream" uid="uid://wgipu7588bo4" path="res://assets/sounds/Shreksophone (Original).mp3" id="13_rfo4y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6muyn"]
@@ -470,8 +470,7 @@ player_list = NodePath("Lobby/Player List")
 start_game_button = NodePath("Lobby/Start Button")
 alert_box = NodePath("../Alert Box")
 alert_message = NodePath("../Alert Box/Message")
-main_menu_scene = null
-main_scene = ExtResource("10_im1nl")
+main_scene = ExtResource("10_7ogl0")
 
 [node name="Menu" type="Control" parent="Online"]
 layout_mode = 1

@@ -93,16 +93,16 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
-		if !rotation_locked:
-			rig.look_at(position + -direction)
-		else:
-			rig.rotation = Vector3(0, 160, 0)
+		#if !rotation_locked:
+			#rig.look_at(position + -direction)
+		#else:
+			#rig.rotation = Vector3(0, 160, 0)
 		
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
-		if rotation_locked:
-			rig.rotation = Vector3(0, 160, 0)
+		#if rotation_locked:
+			#rig.rotation = Vector3(0, 160, 0)
 
 	move_and_slide()
 

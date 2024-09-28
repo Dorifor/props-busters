@@ -70,7 +70,7 @@ func _process(_delta):
 
 
 @rpc("call_local")
-func propage_prop_change(prop_change_dict):
+func propagate_prop_change(prop_change_dict):
 #	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
 #		return
 	
@@ -106,7 +106,7 @@ func transform_into_prop():
 		}
 	}
 	
-	propage_prop_change.rpc(prop_change_payload)
+	propagate_prop_change.rpc(prop_change_payload)
 
 
 func start_ability_timeout_progress():
