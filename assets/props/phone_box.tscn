@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://drpemyofvxta8"]
 
-[ext_resource type="Texture2D" uid="uid://cqil5tcyvesck" path="res://assets/models/TEX_phone_box.png" id="1_v6ea4"]
-[ext_resource type="Texture2D" uid="uid://cfhwvaiqmd7vv" path="res://assets/models/lambert1_Alpha.png" id="2_l0ktk"]
+[ext_resource type="Texture2D" uid="uid://cqil5tcyvesck" path="res://assets/textures/TEX_phone_box.png" id="1_v6ea4"]
+[ext_resource type="Texture2D" uid="uid://cfhwvaiqmd7vv" path="res://assets/textures/lambert1_Alpha.png" id="2_l0ktk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0i0s"]
 resource_name = "lambert1"

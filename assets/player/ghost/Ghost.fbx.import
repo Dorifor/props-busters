@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cku1vmynhyksc"
-path="res://.godot/imported/Ghost.fbx-3aa7609744005822aa8e1b00a3e5acc1.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/player/ghost/Ghost.fbx"
-dest_files=["res://.godot/imported/Ghost.fbx-3aa7609744005822aa8e1b00a3e5acc1.scn"]
 
 [params]
 

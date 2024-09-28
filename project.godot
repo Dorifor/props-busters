@@ -18,8 +18,8 @@ config/icon="res://assets/icon.svg"
 
 [autoload]
 
-Globals="*res://assets/globals.gd"
-Constants="*res://assets/constants.gd"
+Globals="*res://assets/scripts/globals.gd"
+Constants="*res://assets/scripts/constants.gd"
 GlobalRessources="*res://assets/ui/main menu/global_ressources.tscn"
 
 [display]

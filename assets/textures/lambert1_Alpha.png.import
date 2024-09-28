@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqil5tcyvesck"
-path.s3tc="res://.godot/imported/TEX_phone_box.png-4ad81c1a2a3060eb740b4ed495d4e312.s3tc.ctex"
+uid="uid://cfhwvaiqmd7vv"
+path.s3tc="res://.godot/imported/lambert1_Alpha.png-3b0b6aa0b5324f430d898bdaae55898a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/models/TEX_phone_box.png"
-dest_files=["res://.godot/imported/TEX_phone_box.png-4ad81c1a2a3060eb740b4ed495d4e312.s3tc.ctex"]
+source_file="res://assets/textures/lambert1_Alpha.png"
+dest_files=["res://.godot/imported/lambert1_Alpha.png-3b0b6aa0b5324f430d898bdaae55898a.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +20,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://assets/models/lambert1_Alpha.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

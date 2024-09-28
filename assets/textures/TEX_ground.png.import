@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drkrxau4kaw31"
-path.s3tc="res://.godot/imported/TEX_lamp.png-95e1ed167629c9af3ea27ae43bab4926.s3tc.ctex"
+uid="uid://d2pcy41awfbgc"
+path.s3tc="res://.godot/imported/TEX_ground.png-09acedcdf46e02d8d2484b0c9b839f9a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/models/TEX_lamp.png"
-dest_files=["res://.godot/imported/TEX_lamp.png-95e1ed167629c9af3ea27ae43bab4926.s3tc.ctex"]
+source_file="res://assets/textures/TEX_ground.png"
+dest_files=["res://.godot/imported/TEX_ground.png-09acedcdf46e02d8d2484b0c9b839f9a.s3tc.ctex"]
 
 [params]
 

@@ -1,7 +1,4 @@
-[gd_resource type="Theme" load_steps=21 format=3 uid="uid://rry0vxdb3l3k"]
-
-[ext_resource type="FontFile" uid="uid://by0k5nkv3reqj" path="res://assets/fonts/Outfit-Bold.ttf" id="1_i1snl"]
-[ext_resource type="FontFile" uid="uid://cfdt321427s1y" path="res://assets/fonts/Outfit-Regular.ttf" id="2_osopi"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://rry0vxdb3l3k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iot2t"]
 content_margin_left = 8.0
@@ -231,14 +228,14 @@ shadow_size = 4
 shadow_offset = Vector2(2, 2)
 
 [resource]
-Button/fonts/font = ExtResource("1_i1snl")
+Button/fonts/font = null
 Button/styles/hover = SubResource("StyleBoxFlat_iot2t")
 Button/styles/normal = SubResource("StyleBoxFlat_4u3g1")
 Button/styles/pressed = SubResource("StyleBoxFlat_rw5o2")
 CheckButton/styles/normal = SubResource("StyleBoxEmpty_a27r5")
 ItemList/styles/panel = SubResource("StyleBoxFlat_t7q1c")
 ItemList/styles/selected = SubResource("StyleBoxFlat_ftbsg")
-Label/fonts/font = ExtResource("2_osopi")
+Label/fonts/font = null
 LineEdit/styles/normal = SubResource("StyleBoxFlat_gcri3")
 LineEdit/styles/read_only = SubResource("StyleBoxFlat_g1dtx")
 MainMenuButton/base_type = &"Button"
@@ -256,7 +253,7 @@ MainMenuButton/styles/pressed = SubResource("StyleBoxFlat_psk4k")
 OptionButton/styles/normal = SubResource("StyleBoxFlat_u46dt")
 Panel/styles/panel = SubResource("StyleBoxFlat_4d84c")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_iueap")
-PopupMenu/fonts/font = ExtResource("2_osopi")
+PopupMenu/fonts/font = null
 PopupMenu/styles/panel = SubResource("StyleBoxFlat_0qkiv")
 PrimaryButton/base_type = &"Button"
 PrimaryButton/colors/font_color = Color(1, 0.898039, 0.792157, 1)

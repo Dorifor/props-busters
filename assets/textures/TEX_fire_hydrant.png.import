@@ -2,26 +2,27 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ni5taqjfcoao"
-path="res://.godot/imported/test_32x32_6.png-11f2ddaba51bafbbfad020d4fbd712fd.ctex"
+uid="uid://c7kuxdwv3baqf"
+path.s3tc="res://.godot/imported/TEX_fire_hydrant.png-373b0d68b78b166c7994b23bfd7f2a01.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://assets/planks/test_32x32_6.png"
-dest_files=["res://.godot/imported/test_32x32_6.png-11f2ddaba51bafbbfad020d4fbd712fd.ctex"]
+source_file="res://assets/textures/TEX_fire_hydrant.png"
+dest_files=["res://.godot/imported/TEX_fire_hydrant.png-373b0d68b78b166c7994b23bfd7f2a01.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

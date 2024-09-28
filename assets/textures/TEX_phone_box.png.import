@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbdea0io5reko"
-path.s3tc="res://.godot/imported/TEX_trashcan.png-81091a169aba3842e464b5272064ecaa.s3tc.ctex"
+uid="uid://cqil5tcyvesck"
+path.s3tc="res://.godot/imported/TEX_phone_box.png-924bccff016e64f517288c3e69afaf96.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/models/TEX_trashcan.png"
-dest_files=["res://.godot/imported/TEX_trashcan.png-81091a169aba3842e464b5272064ecaa.s3tc.ctex"]
+source_file="res://assets/textures/TEX_phone_box.png"
+dest_files=["res://.godot/imported/TEX_phone_box.png-924bccff016e64f517288c3e69afaf96.s3tc.ctex"]
 
 [params]
 
