@@ -5,29 +5,30 @@ class_name Hunter
 @export var bullet_spawn_marker: Marker3D 
 @export var animation_tree: AnimationTree
 @export var animation_player: AnimationPlayer
-@onready var aim = $aim
+@export var crosshair: Control
 
 func _ready():
 	super()
 	if not is_multiplayer_authority(): return
 	animation_tree.active = true
 
+
 func _input(event):
 	super._input(event)
 	if not is_multiplayer_authority(): return
 	
 	if Input.is_action_pressed("aimat"):
-		aim.visible = true
+		crosshair.visible = true
 		#camera.position = Vector3(0.46,1.79,0.42)
 		camera.position = Vector3(0.659,1.791,0.62)
 		rotation_locked = true;
 		if Input.is_action_just_pressed("attack"):
 			shoot.rpc()
 	else :
-		aim.visible = false
+		crosshair.visible = false
 		camera.position = Vector3(0.46,2.47,2.10)
 		rotation_locked = false;
-		
+
 
 func _process(delta):
 	super(delta)
@@ -43,21 +44,20 @@ func _process(delta):
 		else :
 			walk_animation_parameters.rpc()
 
+
 @rpc("call_local")
 func shoot():
+	var bullet: Node3D = bullet_scene.instantiate()
 	
-	print("MAP 1: ", multiplayer.get_unique_id())
-	print(Globals.NBRPROP)
-	var bullet = bullet_scene.instantiate()
 	get_parent().add_child(bullet)
 	
 	bullet.transform.origin = bullet_spawn_marker.global_transform.origin
 	bullet.global_transform.basis = get_cam_rot()
 
-	get_parent().add_child(bullet)
 
 func get_cam_rot():
 	return camera.global_transform.basis
+
 
 func _unhandled_input(_event):
 	if not is_multiplayer_authority(): return

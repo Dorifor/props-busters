@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://assets/ui/playerlistmenu/player_list_menu.gd" id="1_71w7g"]
 [ext_resource type="Theme" uid="uid://rry0vxdb3l3k" path="res://assets/ui/styles/main_menu_theme.tres" id="2_wtpik"]
 
-[node name="Player List Menu" type="Control" node_paths=PackedStringArray("player_list", "instructions_label")]
+[node name="Player List Menu" type="Control" node_paths=PackedStringArray("player_list", "instructions_label", "kick_confirmation_popup", "kick_confirmation_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +13,8 @@ grow_vertical = 2
 script = ExtResource("1_71w7g")
 player_list = NodePath("Player List")
 instructions_label = NodePath("Instruction Label")
+kick_confirmation_popup = NodePath("Kick Confirmation Popup")
+kick_confirmation_label = NodePath("Kick Confirmation Popup/Kick Label")
 
 [node name="Instruction Label" type="Label" parent="."]
 visible = false
@@ -43,6 +45,7 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+focus_mode = 1
 theme = ExtResource("2_wtpik")
 theme_override_font_sizes/font_size = 24
 allow_search = false
@@ -50,5 +53,56 @@ item_count = 2
 item_0/text = "lama"
 item_1/text = "jojifiant"
 
+[node name="Kick Confirmation Popup" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.5
+offset_top = -53.5
+offset_right = 184.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Kick Label" type="Label" parent="Kick Confirmation Popup"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 16.0
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "Kick {player_name} ?"
+horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Action Buttons Container" type="HBoxContainer" parent="Kick Confirmation Popup"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -53.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Yes Button" type="Button" parent="Kick Confirmation Popup/Action Buttons Container"]
+layout_mode = 2
+focus_mode = 1
+text = "Yes, kick them"
+
+[node name="No Button" type="Button" parent="Kick Confirmation Popup/Action Buttons Container"]
+layout_mode = 2
+focus_mode = 1
+text = "Nope, wrong guy"
+
 [connection signal="player_disconnected" from="." to="." method="_on_player_disconnected"]
 [connection signal="item_clicked" from="Player List" to="." method="_on_player_list_item_clicked"]
+[connection signal="pressed" from="Kick Confirmation Popup/Action Buttons Container/Yes Button" to="." method="_on_kick_yes_button_pressed"]
+[connection signal="pressed" from="Kick Confirmation Popup/Action Buttons Container/No Button" to="." method="_on_kick_no_button_pressed"]

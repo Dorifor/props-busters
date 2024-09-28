@@ -17,7 +17,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var base_position: Vector3
 
-var player_list: Control
+var player_list: PlayerListMenu
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
@@ -47,6 +47,7 @@ func _input(event):
 	if Input.is_action_just_released("tab"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		player_list.hide()
+		player_list.kick_confirmation_popup.hide()
 	
 	if event is InputEventMouseMotion and !player_list.visible:
 		rotate_y(deg_to_rad(-event.relative.x * horizontal_sens))
@@ -66,6 +67,7 @@ func _input(event):
 func _process(_delta):
 	if not is_multiplayer_authority():
 		return
+
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return

@@ -5,18 +5,9 @@ signal server_disconnected
 @export var hunter_scene: PackedScene
 @export var hider_scene: PackedScene
 @export var spawn_path_follow: PathFollow3D
-@onready var main_menu_scene = "res://assets/ui/main menu/main_menu.tscn"
 @export var multiplayer_spawner: MultiplayerSpawner
 
 @export var player_nodes: Array[Node] = []
-
-func mettreAJourVariablePartagee():
-	_on_mettreAJourVariablePartagee.rpc()
-
-
-@rpc("call_local")
-func _on_mettreAJourVariablePartagee():
-	Globals.NBRPROP += 1
 
 
 func _ready():
@@ -24,7 +15,6 @@ func _ready():
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	if not is_multiplayer_authority():
 		return
-#	$Control.hide()
 	await get_tree().process_frame 
 
 	var rng = RandomNumberGenerator.new()
@@ -43,7 +33,6 @@ func _ready():
 			add_player(player)
 		else:
 			add_prop_player(player)
-			mettreAJourVariablePartagee()
 
 
 func add_player(peer_id):
@@ -69,10 +58,4 @@ func _on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	Globals.PLAYER_DATA.clear()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	get_tree().change_scene_to_file(main_menu_scene)
-	
-
-func _process(delta):
-#	if Globals.NBRPROP <= 0:
-#		$Control.show()
-	pass
+	get_tree().change_scene_to_packed(GlobalRessources.main_menu_scene)

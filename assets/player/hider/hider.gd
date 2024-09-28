@@ -164,13 +164,16 @@ func transform_into_ghost():
 	$Visuals/MESH_Ghost.show()
 	$GhostWaitTime.start()
 
+
 func _on_ghost_wait_time_timeout():
 	is_ghost = false
 	$Visuals/Mesh.show()
 	$Visuals/MESH_Ghost.hide()
 
+
 func UpdateNumberHider():
 	_on_UpdateNumberHiderOnline.rpc()
+
 
 @rpc("call_local")
 func _on_UpdateNumberHiderOnline():

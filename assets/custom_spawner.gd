@@ -7,6 +7,7 @@ extends MultiplayerSpawner
 func _init() -> void:
 	spawn_function = _spawn_custom
 
+
 func _spawn_custom(data: Variant) -> Node:
 	randomize()
 	spawn_path_follow.progress_ratio = randf()
