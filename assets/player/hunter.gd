@@ -1,4 +1,4 @@
-extends BaseCharacter
+extends BaseCharacterFPS
 class_name Hunter
 
 @export var bullet_scene: PackedScene
@@ -16,18 +16,6 @@ func _ready():
 func _input(event):
 	super._input(event)
 	if not is_multiplayer_authority(): return
-	
-	if Input.is_action_pressed("aimat"):
-		crosshair.visible = true
-		#camera.position = Vector3(0.46,1.79,0.42)
-		camera.position = Vector3(0.659,1.791,0.62)
-		rotation_locked = true;
-		if Input.is_action_just_pressed("attack"):
-			shoot.rpc()
-	else :
-		crosshair.visible = false
-		camera.position = Vector3(0.46,2.47,2.10)
-		rotation_locked = false;
 
 
 func _process(delta):
