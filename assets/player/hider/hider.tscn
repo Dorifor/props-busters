@@ -63,6 +63,9 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath("Visuals:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+properties/3/path = NodePath(".:scale")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [node name="Hider" type="CharacterBody3D" node_paths=PackedStringArray("raycast", "ability_timer", "ability_cooldown_timer", "hider_mesh", "hider_collision", "hider_ui", "interact_ui", "ability_progress_bar", "rig", "camera_mount", "camera")]
 collision_layer = 4

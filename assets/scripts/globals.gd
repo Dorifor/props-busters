@@ -13,6 +13,6 @@ extends Node
 
 @export var NBRPROP = 0
 
-@export var FORCE_HIDER_SINGLE_PLAYER = true
+@export var FORCE_HIDER_SINGLE_PLAYER = false
 
 @export var DEBUG_MODE = false
