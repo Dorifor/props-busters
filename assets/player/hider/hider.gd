@@ -69,6 +69,20 @@ func _process(_delta):
 		interact_ui.visible = false
 
 
+func apply_mouse_movement(event: InputEvent):
+	if event is InputEventMouseMotion and !player_list.visible:
+		var x_rotation = deg_to_rad(event.relative.x * Globals.HORIZONTAL_SENSIBILITY_VALUE)
+		if Input.is_action_pressed("hider_rotate"):
+			rig.rotate_y(-x_rotation)
+		else:
+			rotate_y(-x_rotation)
+			rig.rotate_y(x_rotation)
+			camera_mount.rotate_x((deg_to_rad(-event.relative.y * Globals.VERTICAL_SENSIBILITY_VALUE)))
+			var camera_rotation = camera_mount.rotation_degrees
+			camera_rotation.x = clamp(camera_rotation.x, -30, 30)
+			camera_mount.rotation_degrees = camera_rotation
+
+
 @rpc("call_local")
 func propagate_prop_change(prop_change_dict):
 #	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():

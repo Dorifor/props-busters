@@ -60,6 +60,9 @@ properties/0/replication_mode = 2
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
+properties/2/path = NodePath("Visuals:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 2
 
 [node name="Hider" type="CharacterBody3D" node_paths=PackedStringArray("raycast", "ability_timer", "ability_cooldown_timer", "hider_mesh", "hider_collision", "hider_ui", "interact_ui", "ability_progress_bar", "rig", "camera_mount", "camera")]
 collision_layer = 4
@@ -68,12 +71,12 @@ script = ExtResource("1_ycexa")
 raycast = NodePath("Camera Mount/Camera3D/Props Raycast")
 ability_timer = NodePath("Ability Timer")
 ability_cooldown_timer = NodePath("Ability Cooldown")
-hider_mesh = NodePath("visuals/Mesh")
+hider_mesh = NodePath("Visuals/Mesh")
 hider_collision = NodePath("Collision")
 hider_ui = NodePath("Hider UI")
 interact_ui = NodePath("Hider UI/Interact Label")
 ability_progress_bar = NodePath("Hider UI/Ability Progress Bar")
-rig = NodePath("visuals")
+rig = NodePath("Visuals")
 camera_mount = NodePath("Camera Mount")
 camera = NodePath("Camera Mount/Camera3D")
 
@@ -84,13 +87,13 @@ mouse_filter = 2
 [node name="Interact Label" parent="Hider UI" index="0"]
 visible = false
 
-[node name="visuals" type="Node3D" parent="."]
+[node name="Visuals" type="Node3D" parent="."]
 
-[node name="Mesh" type="MeshInstance3D" parent="visuals"]
+[node name="Mesh" type="MeshInstance3D" parent="Visuals"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.254186, 0)
 mesh = SubResource("CapsuleMesh_fq0un")
 
-[node name="MESH_Ghost" type="MeshInstance3D" parent="visuals"]
+[node name="MESH_Ghost" type="MeshInstance3D" parent="Visuals"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.398909, 0)
 visible = false
 mesh = SubResource("ArrayMesh_fvxg3")

@@ -38,9 +38,6 @@ func _input(event):
 	if not is_multiplayer_authority(): return
 	if Globals.IS_GAME_PAUSED: return
 	
-	var horizontal_sens = Globals.HORIZONTAL_SENSIBILITY_VALUE
-	var vertical_sens = Globals.VERTICAL_SENSIBILITY_VALUE 
-	
 	if Input.is_action_just_pressed("tab"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		player_list.show()
@@ -49,16 +46,7 @@ func _input(event):
 		player_list.hide()
 		player_list.kick_confirmation_popup.hide()
 	
-	if event is InputEventMouseMotion and !player_list.visible:
-		rotate_y(deg_to_rad(-event.relative.x * horizontal_sens))
-		
-		if !rotation_locked:
-			rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
-		
-		camera_mount.rotate_x((deg_to_rad(-event.relative.y * vertical_sens)))
-		var camera_rotation = camera_mount.rotation_degrees
-		camera_rotation.x = clamp(camera_rotation.x, -30, 30)
-		camera_mount.rotation_degrees = camera_rotation
+	apply_mouse_movement(event)
 		
 	if Input.is_action_just_released("pause"):
 		pause()
@@ -106,6 +94,17 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+func apply_mouse_movement(event: InputEvent):
+	if event is InputEventMouseMotion and !player_list.visible:
+		rotate_y(deg_to_rad(-event.relative.x * Globals.HORIZONTAL_SENSIBILITY_VALUE))
+		
+		#if !rotation_locked:
+			#rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
+		
+		camera_mount.rotate_x((deg_to_rad(-event.relative.y * Globals.VERTICAL_SENSIBILITY_VALUE)))
+		var camera_rotation = camera_mount.rotation_degrees
+		camera_rotation.x = clamp(camera_rotation.x, -30, 30)
+		camera_mount.rotation_degrees = camera_rotation
 
 func pause():
 	if not is_multiplayer_authority(): return

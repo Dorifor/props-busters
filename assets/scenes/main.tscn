@@ -235,7 +235,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.1, 0)
 shape = SubResource("BoxShape3D_hth55")
 
 [node name="Trashcan" parent="." instance=ExtResource("8_5qy7n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.66496, 0.255914, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.66496, 0.438358, 0)
 
 [node name="Trashcan2" parent="." instance=ExtResource("8_5qy7n")]
 transform = Transform3D(1.214, 0, 0, 0, 1.214, 0, 0, 0, 1.214, -1.18889, 0.531097, -1.87659)
