@@ -37,8 +37,9 @@ func _ready():
 	username_input.text = str(randi())
 
 
-func _on_join_button_pressed(address = "localhost"):
-	if username_input.text == "": return
+func _on_join_button_pressed(address = "localhost") -> void:
+	if username_input.text == "":
+		return
 	
 	player_info = {"name": username_input.text}
 	menu_panel.hide()
@@ -46,14 +47,32 @@ func _on_join_button_pressed(address = "localhost"):
 	start_game_button.hide()
 	DEFAULT_SERVER_IP = ip_address_input.text
 	address = DEFAULT_SERVER_IP
+	
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, PORT)
 	
-	if error:
-		print(error)
-		return error
+	if error != OK:
+		print("Error during connection: %s" % error)
+		return
 	
 	multiplayer.multiplayer_peer = peer
+	
+	var timer = Timer.new()
+	add_child(timer)
+	timer.wait_time = 4.0
+	timer.one_shot = true
+	timer.start()
+
+	await timer.timeout
+	
+	if multiplayer.get_multiplayer_peer() != null and multiplayer.multiplayer_peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED:
+		print("Error: Failed to join within 4 seconds.")
+		menu_panel.show()
+		lobby_panel.hide()
+		start_game_button.show()
+		return
+	
+	print("Successfully connected to the server.")
 
 
 func _on_host_button_pressed():
