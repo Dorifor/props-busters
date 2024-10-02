@@ -6,12 +6,41 @@ class_name Hunter
 @export var animation_tree: AnimationTree
 @export var animation_player: AnimationPlayer
 @export var crosshair: Control
+@export var WaitText: TextEdit
+
+@export var cooldown_duration: float = 10.0
+var countdown_timer: Timer
+var current_count: int = 0
 
 func _ready():
 	super()
-	if not is_multiplayer_authority(): return
+	
+	if not is_multiplayer_authority():
+		return
+	
 	animation_tree.active = true
+	crosshair.visible = true
+	
+	# Initialiser le Timer
+	countdown_timer = Timer.new()
+	countdown_timer.wait_time = 1.0 
+	countdown_timer.one_shot = false
+	countdown_timer.timeout.connect(_on_countdown_tick)
+	add_child(countdown_timer)
+	
+	# Commencer le décompte
+	current_count = int(cooldown_duration)
+	WaitText.text = str(current_count)
+	countdown_timer.start()
 
+# Fonction appelée à chaque tick du Timer
+func _on_countdown_tick():
+	current_count -= 1
+	WaitText.text = str(current_count)
+	
+	if current_count <= 0:
+		countdown_timer.stop()
+		crosshair.visible = false
 
 func _input(event):
 	super._input(event)
