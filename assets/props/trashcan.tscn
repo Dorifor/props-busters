@@ -50,11 +50,13 @@ radius = 0.3
 
 [node name="Prop" type="StaticBody3D"]
 collision_layer = 4
+metadata/can_transform = false
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.440592, 0)
 mesh = SubResource("ArrayMesh_5aq71")
 skeleton = NodePath("")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.083358, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.357234, 0)
 shape = SubResource("CylinderShape3D_6wv7a")

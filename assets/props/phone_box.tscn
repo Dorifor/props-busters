@@ -51,10 +51,13 @@ size = Vector3(0.9, 2.41, 0.9)
 
 [node name="Prop" type="StaticBody3D"]
 collision_layer = 4
+metadata/can_transform = true
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 mesh = SubResource("ArrayMesh_taig2")
 skeleton = NodePath("")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 shape = SubResource("BoxShape3D_u1gu7")

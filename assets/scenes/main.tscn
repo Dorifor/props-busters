@@ -329,7 +329,7 @@ mesh = SubResource("CylinderMesh_swxuv")
 shape = SubResource("ConvexPolygonShape3D_qgguc")
 
 [node name="Prop 2" parent="." instance=ExtResource("16_8dp5m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.8007, 1.2079, 1.2621)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.8007, 1.21, 1.2621)
 
 [connection signal="server_disconnected" from="." to="." method="_on_server_disconnected"]
 

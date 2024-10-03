@@ -49,9 +49,12 @@ radius = 0.34
 
 [node name="Fire Hydrant" type="StaticBody3D"]
 collision_layer = 4
+metadata/can_transform = false
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 mesh = SubResource("ArrayMesh_pf2it")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CylinderShape3D_aqb2t")
