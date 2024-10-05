@@ -6,11 +6,13 @@ bottom_radius = 0.1
 height = 0.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_aqb2t"]
+resource_local_to_scene = true
 height = 0.5
 radius = 0.1
 
-[node name="Prop" type="StaticBody3D"]
+[node name="Prop" type="StaticBody3D" groups=["prop"]]
 collision_layer = 4
+collision_mask = 5
 metadata/can_transform = false
 
 [node name="Mesh" type="MeshInstance3D" parent="."]

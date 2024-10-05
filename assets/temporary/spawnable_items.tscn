@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b34c2hmbqdbab"]
+[gd_scene load_steps=23 format=3 uid="uid://b34c2hmbqdbab"]
 
 [ext_resource type="Script" path="res://assets/temporary/spawnable_zone.gd" id="1_yudpr"]
 [ext_resource type="PackedScene" uid="uid://dster8131gnji" path="res://assets/props/fire_hydrant.tscn" id="2_xi7ty"]
@@ -33,14 +33,25 @@ region_merge_size = 1.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_ktch5"]
 size = Vector3(8, 1, 8)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rbpet"]
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_lkm5g"]
+material = SubResource("StandardMaterial3D_rbpet")
 size = Vector3(8, 1, 8)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ug8x1"]
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_t0o1n"]
+material = SubResource("StandardMaterial3D_ug8x1")
 size = Vector3(1, 1, 2)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_73w5h"]
-data = PackedVector3Array(-0.5, 0.5, 1, 0.5, 0.5, 1, -0.5, -0.5, 1, 0.5, 0.5, 1, 0.5, -0.5, 1, -0.5, -0.5, 1, 0.5, 0.5, -1, -0.5, 0.5, -1, 0.5, -0.5, -1, -0.5, 0.5, -1, -0.5, -0.5, -1, 0.5, -0.5, -1, 0.5, 0.5, 1, 0.5, 0.5, -1, 0.5, -0.5, 1, 0.5, 0.5, -1, 0.5, -0.5, -1, 0.5, -0.5, 1, -0.5, 0.5, -1, -0.5, 0.5, 1, -0.5, -0.5, -1, -0.5, 0.5, 1, -0.5, -0.5, 1, -0.5, -0.5, -1, 0.5, 0.5, 1, -0.5, 0.5, 1, 0.5, 0.5, -1, -0.5, 0.5, 1, -0.5, 0.5, -1, 0.5, 0.5, -1, -0.5, -0.5, 1, 0.5, -0.5, 1, -0.5, -0.5, -1, 0.5, -0.5, 1, 0.5, -0.5, -1, -0.5, -0.5, -1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_7j8l5"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0bs2b"]
+size = Vector3(1, 0.1, 2)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_220pa"]
 vertices = PackedVector3Array(3.75, 0.6, -1.15, 3.25, 0.6, -1.15, 3.2, 0.6, -0.95, 1.2, 0.6, -2.65, 1.6, 0.6, -2.85, 1.6, 0.6, -3.75, 2.5, 0.6, -0.25, 3.75, 0.6, 3.75, 0.65, 0.6, -2.1, -3.75, 0.6, -3.75, 1.9, 0.6, -0.35, 1.9, 0.6, -0.45, 0.6, 0.6, -1.8, 2.15, 0.6, -0.15, -3.75, 0.6, 3.75, 3.2, 0.6, -1.35, 1.8, 0.6, -2.8, 2.45, 0.6, -2.15, 2.45, 0.6, -2.05, 3.75, 0.6, -3.75, 1.65, 1.6, -2.25, 1.5, 1.6, -2.25, 1.2, 1.6, -1.95, 2.25, 1.6, -0.75, 2.65, 1.6, -1.1, 2.65, 1.6, -1.2, 1.4, 1.6, -1.6)
@@ -50,6 +61,9 @@ cell_height = 0.05
 agent_radius = 0.25
 region_min_size = 1.0
 region_merge_size = 1.0
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_73w5h"]
+data = PackedVector3Array(-0.5, 0.5, 1, 0.5, 0.5, 1, -0.5, -0.5, 1, 0.5, 0.5, 1, 0.5, -0.5, 1, -0.5, -0.5, 1, 0.5, 0.5, -1, -0.5, 0.5, -1, 0.5, -0.5, -1, -0.5, 0.5, -1, -0.5, -0.5, -1, 0.5, -0.5, -1, 0.5, 0.5, 1, 0.5, 0.5, -1, 0.5, -0.5, 1, 0.5, 0.5, -1, 0.5, -0.5, -1, 0.5, -0.5, 1, -0.5, 0.5, -1, -0.5, 0.5, 1, -0.5, -0.5, -1, -0.5, 0.5, 1, -0.5, -0.5, 1, -0.5, -0.5, -1, 0.5, 0.5, 1, -0.5, 0.5, 1, 0.5, 0.5, -1, -0.5, 0.5, 1, -0.5, 0.5, -1, 0.5, 0.5, -1, -0.5, -0.5, 1, 0.5, -0.5, 1, -0.5, -0.5, -1, 0.5, -0.5, 1, 0.5, -0.5, -1, -0.5, -0.5, -1)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rhths"]
 vertices = PackedVector3Array(-3.75, 0.6, 1.25, -2.7, 0.6, 1.25, -2, 0.6, -0.65, -1.65, 0.6, -3.75, -3.75, 0.6, -3.75, -1.65, 0.6, -0.8, -0.65, 0.6, -0.45, -0.5, 0.6, -0.15, 3.75, 0.6, -0.15, 3.75, 0.6, -3.75, -1.1, 1.6, 0.0999999, -1.1, 1.6, -0.0999999, -1.5, 1.6, -0.25, -2.15, 1.6, 1.15, -2.1, 1.6, 1.25, -1.6, 1.6, 1.4, -1.65, 1.6, -0.2, -1.3, 0.6, 1.9, -1.5, 0.6, 1.95, -1.5, 0.6, 3.75, -1.2, 0.6, 1.75, 3.75, 0.6, 3.75, -2.55, 0.6, 1.6, -3.75, 0.6, 3.75)
@@ -82,7 +96,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_tui7m")
 script = ExtResource("1_yudpr")
-zone_props = Array[PackedScene]([ExtResource("2_xi7ty"), ExtResource("3_7wnsg")])
+zone_props = Array[PackedScene]([ExtResource("2_xi7ty"), ExtResource("3_7wnsg"), ExtResource("4_xhoii"), ExtResource("5_ad8ko"), ExtResource("6_ix4wx")])
 test_prop = ExtResource("3_6uu2k")
 
 [node name="ground" type="StaticBody3D" parent="NavigationRegion3D"]
@@ -102,10 +116,21 @@ metadata/_edit_group_ = true
 mesh = SubResource("BoxMesh_t0o1n")
 
 [node name="CollisionShape3D 2" type="CollisionShape3D" parent="NavigationRegion3D/ground 2"]
-shape = SubResource("ConcavePolygonShape3D_73w5h")
+shape = SubResource("BoxShape3D_7j8l5")
+
+[node name="Obstacle" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.783522, 1, -1.49471)
+collision_layer = 16
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D 2" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_0bs2b")
 
 [node name="NavigationRegion3D 2" type="NavigationRegion3D" parent="."]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.5, 0)
+visible = false
 navigation_mesh = SubResource("NavigationMesh_220pa")
 script = ExtResource("1_yudpr")
 zone_props = Array[PackedScene]([ExtResource("5_ad8ko"), ExtResource("6_ix4wx")])
@@ -122,6 +147,7 @@ mesh = SubResource("BoxMesh_lkm5g")
 
 [node name="ground 2" type="StaticBody3D" parent="NavigationRegion3D 2"]
 transform = Transform3D(0.725951, 0, 0.687747, 0, 1, 0, -0.687747, 0, 0.725951, 1.92175, 1, -1.51744)
+collision_layer = 17
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D 2/ground 2"]
@@ -131,7 +157,9 @@ mesh = SubResource("BoxMesh_t0o1n")
 shape = SubResource("ConcavePolygonShape3D_73w5h")
 
 [node name="NavigationRegion3D 3" type="NavigationRegion3D" parent="."]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.5, -10)
+visible = false
 navigation_mesh = SubResource("NavigationMesh_rhths")
 script = ExtResource("1_yudpr")
 zone_props = Array[PackedScene]([ExtResource("2_xi7ty"), ExtResource("5_ad8ko")])
@@ -148,6 +176,7 @@ mesh = SubResource("BoxMesh_lkm5g")
 
 [node name="ground 2" type="StaticBody3D" parent="NavigationRegion3D 3"]
 transform = Transform3D(0.934217, 0, -0.356705, 0, 1, 0, 0.356705, 0, 0.934217, -1.61027, 1, 0.567818)
+collision_layer = 17
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D 3/ground 2"]
@@ -157,7 +186,9 @@ mesh = SubResource("BoxMesh_t0o1n")
 shape = SubResource("ConcavePolygonShape3D_73w5h")
 
 [node name="NavigationRegion3D 4" type="NavigationRegion3D" parent="."]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -10)
+visible = false
 navigation_mesh = SubResource("NavigationMesh_rqt72")
 script = ExtResource("1_yudpr")
 zone_props = Array[PackedScene]([ExtResource("3_7wnsg"), ExtResource("4_xhoii"), ExtResource("5_ad8ko")])
@@ -174,6 +205,7 @@ mesh = SubResource("BoxMesh_lkm5g")
 
 [node name="ground 2" type="StaticBody3D" parent="NavigationRegion3D 4"]
 transform = Transform3D(0.845579, 0, -0.533851, 0, 1, 0, 0.533851, 0, 0.845579, 1.22068, 1, 1.04495)
+collision_layer = 17
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D 4/ground 2"]
@@ -183,4 +215,12 @@ mesh = SubResource("BoxMesh_t0o1n")
 shape = SubResource("ConcavePolygonShape3D_73w5h")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 4, 10, 3)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+visible = false
+projection = 1
+size = 10.0
+
+[node name="Camera3D 2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 6, 4)
+current = true
+size = 10.0

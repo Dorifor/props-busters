@@ -5,7 +5,6 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0i0s"]
 resource_name = "lambert1"
-transparency = 1
 diffuse_mode = 1
 albedo_texture = ExtResource("1_v6ea4")
 metallic = 0.2
@@ -43,14 +42,15 @@ _surfaces = [{
 "vertex_count": 64,
 "vertex_data": PackedByteArray("YjDAvZv3mT9ep7G90myzPh/3jD+K+Km+0myzvh/3jD+K+Km+ZTDAPZv3mT9ep7G9vJzhPuUmWz97+t2+vJzhvuUmWz97+t2+0myzPh/3jD+K+Km+0myzvh/3jD+K+Km+0myzvh/3jD+K+Km+0myzvh/3jD+K+Kk+YjDAvZv3mT9ep7G9YjDAvZv3mT9ep7E9vJzhvuUmWz97+t2+vJzhvuUmWz97+t0+0myzvh/3jD+K+Km+0myzvh/3jD+K+Kk+0myzPh/3jD+K+Kk+vJzhPuUmWz97+t2+0myzPh/3jD+K+Km+vJzhPuUmWz97+t0+ZTDAPZv3mT9ep7E90myzPh/3jD+K+Km+ZTDAPZv3mT9ep7G90myzPh/3jD+K+Kk+vJzhvpv3mb97+t2+vJzhvuUmWz97+t0+vJzhvuUmWz97+t2+vJzhvpv3mb97+t0+vJzhPuUmWz97+t0+vJzhPpv3mb97+t0+vJzhPuUmWz97+t2+vJzhPpv3mb97+t2+vJzhPpv3mb97+t2+vJzhvuUmWz97+t2+vJzhPuUmWz97+t2+vJzhvpv3mb97+t2+YjDAvZv3mT9ep7E9ZTDAPZv3mT9ep7G9YjDAvZv3mT9ep7G9ZTDAPZv3mT9ep7E9vJzhPuUmWz97+t0+vJzhvpv3mb97+t0+vJzhPpv3mb97+t0+vJzhvuUmWz97+t0+0myzvh/3jD+K+Kk+vJzhPuUmWz97+t0+0myzPh/3jD+K+Kk+vJzhvuUmWz97+t0+YjDAvZv3mT9ep7E90myzPh/3jD+K+Kk+ZTDAPZv3mT9ep7E90myzvh/3jD+K+Kk+vJzhPpv3mb97+t0+vJzhvpv3mb97+t0+vJzhvpv3mb97+t2+vJzhPpv3mb97+t2+vJzhPuUmWz97+t2+vJzhPuUmWz97+t2+vJzhvuUmWz97+t2+0myzvh/3jD+K+Kk+0myzvh/3jD+K+Kk+0myzPh/3jD+K+Kk+ZTDAPZv3mT9ep7E90myzPh/3jD+K+Kk+fKX//0H9ZsB8pf//hP1cwHyl//+l/HzAfKX//1T/GMCB2v//xfwjwYHa///C/CTBgdr//8T8I8GB2v//wPwkwbJbsttq2xfSsluy2+3ZzNGyW7LbMdrZ0bJbstvE1ivRbCJroj6H2clsImuiOYgty2wia6J6hyrKbCJropSIqcuS3Wui4eyDg5Lda6JP7J6Dkt1rogfsq4OS3WuiDu17g0ykstst2iWuTKSy2+LZNK5MpLLbbNbjrkykstuG2+GtAAD/f/9/hscAAP9//3+cyQAA/3//f6LKAAD/f/9/Zsb///9/AOwAgP///38B9gCA////fzvvAID///9/yPkAgP////+E/TzB/////4P9PMH/////g/09wf////+E/TzB/3///9P//7//f///3P//v/9///97//+//3//////GsD/f/9/p/6rwP9//3/z+wXC/3//f4/6t8L/f/9/2//tv/9/fKWR/9i//398pcP+j7//f3ylZf5uv/9/fKXP/+6//3+B2tH+07//f4HaAP/av/9/gdrp/yPA/3+B2mL+wr//fwAA//88wf9/AAD//zzB/38AAP//PMH/fwAA//88wbNIxPXF/CPBDLzxw8X8I8GYQFnkwvwkwWtsPubt2czRbCJrou3ZzNEbx+O44eyDg56OnuYt2iWu/3//v2X+br8=")
 }]
-blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e5tau")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u1gu7"]
+resource_local_to_scene = true
 size = Vector3(0.9, 2.41, 0.9)
 
-[node name="Prop" type="StaticBody3D"]
+[node name="Prop" type="StaticBody3D" groups=["prop"]]
 collision_layer = 4
+collision_mask = 5
 metadata/can_transform = true
 
 [node name="Mesh" type="MeshInstance3D" parent="."]

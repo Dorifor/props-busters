@@ -44,11 +44,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_a5si5")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_aqb2t"]
+resource_local_to_scene = true
 height = 1.111
 radius = 0.34
 
-[node name="Fire Hydrant" type="StaticBody3D"]
+[node name="Fire Hydrant" type="StaticBody3D" groups=["prop"]]
 collision_layer = 4
+collision_mask = 5
 metadata/can_transform = false
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
