@@ -13,6 +13,7 @@ class_name BaseCharacterFPS
 @export var pause_menu: Control
 
 var rotation_locked = false
+var is_locked = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var base_position: Vector3
@@ -78,7 +79,7 @@ func _physics_process(delta):
 	
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
+	if direction && is_locked == false:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 		#if !rotation_locked:
