@@ -59,7 +59,7 @@ func _process(_delta):
 	
 	if raycast.is_colliding() and is_ghost == false:
 		var collider = raycast.get_collider()
-		if collider is StaticBody3D:
+		if collider is StaticBody3D and collider.has_meta("can_transform"):
 			interact_ui.visible = true
 			is_focusing_prop = true
 			focused_prop = collider

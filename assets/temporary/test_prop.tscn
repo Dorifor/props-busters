@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmafyuk5168q3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50ojp"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bwemh"]
+material = SubResource("StandardMaterial3D_50ojp")
+radius = 0.1
+height = 0.2
+radial_segments = 8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aqsw4"]
+radius = 0.1
+height = 0.2
+
+[node name="TestProp" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_bwemh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_aqsw4")

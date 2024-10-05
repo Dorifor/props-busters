@@ -34,6 +34,14 @@ window/vsync/vsync_mode=0
 
 naming/node_name_num_separator=1
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+
+[global_group]
+
+prop=""
+
 [gui]
 
 theme/custom="res://assets/ui/styles/main_menu_theme.tres"
@@ -106,3 +114,5 @@ hider_rotate={
 3d_physics/layer_2="hunter"
 3d_physics/layer_3="props"
 3d_physics/layer_4="bullets"
+3d_physics/layer_5="obstacles"
+3d_physics/layer_6="mesh_ground"
