@@ -1,8 +1,11 @@
 extends NavigationRegion3D
+class_name SpawnableZone
 
 @export var zone_props: Array[PackedScene]
 @export var test_prop: PackedScene
 @export var max_count: int = 8
+
+signal finished_spawning
 
 func _ready() -> void:
 	await get_tree().physics_frame 
@@ -11,7 +14,9 @@ func _ready() -> void:
 	var rng = RandomNumberGenerator.new()
 	
 	for i in range(rng.randi_range(0, max_count)):
-		spawn_at_random_pos(zone_props.pick_random())
+		await spawn_at_random_pos(zone_props.pick_random())
+	
+	finished_spawning.emit()
 
 
 func _input(event: InputEvent) -> void:
@@ -19,7 +24,7 @@ func _input(event: InputEvent) -> void:
 		get_tree().reload_current_scene()
 
 
-func spawn_at_random_pos(prop: PackedScene):	
+func spawn_at_random_pos(prop: PackedScene):
 	var prop_instance = prop.instantiate() as StaticBody3D
 	add_child(prop_instance)
 	
@@ -33,7 +38,9 @@ func get_random_zone_prop():
 
 
 func get_random_pos() -> Vector3:
-	return NavigationServer3D.region_get_random_point(get_rid(), 1, false)
+	var pos = NavigationServer3D.region_get_random_point(get_rid(), 1, false)
+	pos.y -= navigation_mesh.cell_height
+	return pos
 
 
 func is_prop_colliding(prop_instance: StaticBody3D) -> bool:

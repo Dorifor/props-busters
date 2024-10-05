@@ -115,3 +115,4 @@ hider_rotate={
 3d_physics/layer_3="props"
 3d_physics/layer_4="bullets"
 3d_physics/layer_5="obstacles"
+3d_physics/layer_6="mesh_ground"

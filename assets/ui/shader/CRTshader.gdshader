@@ -16,7 +16,7 @@ uniform float rf_switch_esque_blur : hint_range( 0.0, 1.0 ) = 1.0;
 uniform float white_noise_rate : hint_range( 0.0, 1.0 ) = 0.0;
 
 float random( vec2 pos )
-{ 
+{
 	return fract(sin(dot(pos, vec2(12.9898,78.233))) * 43758.5453);
 }
 
