@@ -6,11 +6,22 @@ class_name Hunter
 @export var animation_tree: AnimationTree
 @export var animation_player: AnimationPlayer
 @export var crosshair: Control
-@export var WaitText: TextEdit
+
 
 @export var cooldown_duration: float = 10.0
+
+@export var Raycast: RayCast3D
+
+@export var InteractLabel: Label
+@export var LifepointLabel: Label
+@export var WaitLabel: Label
+
 var countdown_timer: Timer
 var current_count: int = 0
+
+var lifepoint: int = 10
+
+var isInterract = false
 
 func _ready():
 	super()
@@ -20,6 +31,7 @@ func _ready():
 	
 	animation_tree.active = true
 	crosshair.visible = true
+	is_locked = true
 	
 	# Initialiser le Timer
 	countdown_timer = Timer.new()
@@ -30,26 +42,50 @@ func _ready():
 	
 	# Commencer le décompte
 	current_count = int(cooldown_duration)
-	WaitText.text = str(current_count)
+	WaitLabel.text = str(current_count)
 	countdown_timer.start()
 
 # Fonction appelée à chaque tick du Timer
 func _on_countdown_tick():
 	current_count -= 1
-	WaitText.text = str(current_count)
+	WaitLabel.text = str(current_count)
 	
 	if current_count <= 0:
 		countdown_timer.stop()
 		crosshair.visible = false
+		is_locked = false
+		UpdateLifepointText()
+		LifepointLabel.visible = true
 
 func _input(event):
 	super._input(event)
 	if not is_multiplayer_authority(): return
+	
+	if event is InputEventKey and event.is_action_pressed("interact") and isInterract == true:
+		var collider = Raycast.get_collider()
+		if collider and collider.is_class("CharacterBody3D"):
+			print("The RayCast hit a CharacterBody3D!")
+		else:
+			UpdateLifepoint()
 
+func UpdateLifepoint():
+	lifepoint = lifepoint - 1;
+	UpdateLifepointText()
+
+func UpdateLifepointText():
+	LifepointLabel.text = "lifepoint : " + str(lifepoint)
 
 func _process(delta):
 	super(delta)
 	
+	if Raycast.is_colliding() == true:
+		InteractLabel.visible = true
+		isInterract = true
+		
+	else:
+		InteractLabel.visible = false
+		isInterract = false
+		
 	if not is_multiplayer_authority(): return
 	if Globals.IS_GAME_PAUSED: return
 	
@@ -62,7 +98,6 @@ func _process(delta):
 			walk_animation_parameters.rpc()
 
 
-@rpc("call_local")
 func shoot():
 	var bullet: Node3D = bullet_scene.instantiate()
 	
