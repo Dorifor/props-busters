@@ -34,6 +34,10 @@ window/vsync/vsync_mode=0
 
 naming/node_name_num_separator=1
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+
 [global_group]
 
 prop=""

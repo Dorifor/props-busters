@@ -82,4 +82,3 @@ void fragment( )
 	,	float( 0 == int( fixed_uv.y / SCREEN_PIXEL_SIZE.y ) % 2 ) * crt_scan_line_color
 	);
 }
-

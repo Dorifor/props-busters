@@ -2,15 +2,15 @@ extends NavigationRegion3D
 
 @export var zone_props: Array[PackedScene]
 @export var test_prop: PackedScene
-@export var count: int = 8
+@export var max_count: int = 8
 
-func _ready() -> void:		
+func _ready() -> void:
 	await get_tree().physics_frame 
 	await get_tree().physics_frame
 	
 	var rng = RandomNumberGenerator.new()
 	
-	for i in range(rng.randi_range(0, count)):
+	for i in range(rng.randi_range(0, max_count)):
 		spawn_at_random_pos(zone_props.pick_random())
 
 
