@@ -36,13 +36,11 @@ func _on_bullet_colliding():
 func _ready():
 	super()
 	is_ghost = false
-	if not is_multiplayer_authority(): return
 	hider_ui.show()
 
 
 func _input(event):
 	super(event)
-	if not is_multiplayer_authority(): return
 	
 	if is_focusing_prop and event is InputEventKey and event.is_action_pressed("interact") and is_ghost == false:
 		transform_into_prop()
@@ -54,8 +52,6 @@ func _input(event):
 
 func _process(_delta):
 	super(_delta)
-	
-	if not is_multiplayer_authority(): return
 	
 	if raycast.is_colliding() and is_ghost == false:
 		var collider = raycast.get_collider()
@@ -70,7 +66,7 @@ func _process(_delta):
 
 
 func apply_mouse_movement(event: InputEvent):
-	if event is InputEventMouseMotion and !player_list.visible:
+	if event is InputEventMouseMotion:
 		var x_rotation = deg_to_rad(event.relative.x * Globals.HORIZONTAL_SENSIBILITY_VALUE)
 		if Input.is_action_pressed("hider_rotate"):
 			rig.rotate_y(-x_rotation)
