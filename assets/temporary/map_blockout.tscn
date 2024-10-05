@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccnh5lh3cl6iv"]
+
+[ext_resource type="PackedScene" uid="uid://dj26sacnhty4r" path="res://addons/devblocks/blocks/basic_block.tscn" id="1_i1swa"]
+[ext_resource type="PackedScene" uid="uid://camvcri7e11vi" path="res://addons/devblocks/blocks/colored_block.tscn" id="2_35nfj"]
+[ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/hunter.tscn" id="3_c52k3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2lfmn"]
+sky_top_color = Color(0.540498, 0.762629, 0.927717, 1)
+sky_horizon_color = Color(0.691659, 0.800548, 0.886357, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_kacrp"]
+sky_material = SubResource("ProceduralSkyMaterial_2lfmn")
+
+[sub_resource type="Environment" id="Environment_57q2y"]
+background_mode = 2
+sky = SubResource("Sky_kacrp")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="MapBlockout" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_57q2y")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="BasicBlock" parent="." instance=ExtResource("1_i1swa")]
+transform = Transform3D(-23.04, -8.74228e-08, 0, 2.01422e-06, -1, 0, 0, 0, 16, -2.304, 2.01422e-07, 7.2)
+
+[node name="BasicBlock 2" parent="." instance=ExtResource("1_i1swa")]
+transform = Transform3D(-23.04, -8.74228e-08, 0, 2.01422e-06, -1, 0, 0, 0, 16, -2.304, 2.01422e-07, -15.2)
+
+[node name="ColoredBlock" parent="." instance=ExtResource("2_35nfj")]
+transform = Transform3D(2, 0, 0, 0, 0.4, 0, 0, 0, 8, 6.2, 0.699999, -4.1)
+block_color_group = 3
+
+[node name="ColoredBlock 3" parent="." instance=ExtResource("2_35nfj")]
+transform = Transform3D(9.79, 0, 0, 0, 0.2, 0, 0, 0, 6.8, -6.89, 0.599999, 6.38)
+block_color_group = 1
+
+[node name="ColoredBlock 4" parent="." instance=ExtResource("2_35nfj")]
+transform = Transform3D(7.209, 0, 0, 0, 4, 0, 0, 0, 3.6, -2.9327, 2.5, -14.64)
+block_color_group = 1
+
+[node name="ColoredBlock 5" parent="." instance=ExtResource("2_35nfj")]
+transform = Transform3D(7.209, 0, 0, 0, 4, 0, 0, 0, 0.36, -9.4208, 2.5, -22.956)
+block_color_group = 5
+
+[node name="ColoredBlock 6" parent="." instance=ExtResource("2_35nfj")]
+transform = Transform3D(7.209, 0, 0, 0, 4, 0, 0, 0, 0.36, -0.770001, 2.5, -22.956)
+block_color_group = 5
+
+[node name="ColoredBlock 7" parent="." instance=ExtResource("2_35nfj")]
+transform = Transform3D(5.09753, 0, -0.254558, 0, 4, 0, 5.09753, 0, 0.254558, 6.57801, 2.5, -20.4588)
+block_color_group = 5
+
+[node name="ColoredBlock 2" parent="." instance=ExtResource("2_35nfj")]
+transform = Transform3D(1.78191, 0, -2.54558, 0, 2.106, 0, 1.78191, 0, 2.54558, 5.24148, 1.553, 12.2077)
+block_color_group = 4
+
+[node name="Hunter" parent="." instance=ExtResource("3_c52k3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.507891, 10)
+jump_velocity = 5.0
