@@ -22,16 +22,21 @@ var camera_long_distance = 3
 @export var interact_ui: Control
 @export var ability_progress_bar: TextureProgressBar
 
-
+@rpc("any_peer", "call_local")
 func _on_bullet_colliding():
 	if is_ghost == false:
 		is_ghost = true
 		transform_into_ghost()
 	else :
-		UpdateNumberHider()
+		request_removal_from_game_manager()
 		queue_free()
 	# TODO: Kill the player or smth
 
+func request_removal_from_game_manager():
+	if not is_multiplayer_authority():
+		rpc_id(1, "remove_hider", self.get_instance_id())  
+	else:
+		Game_Manager.remove_hider(self.get_instance_id())
 
 func _ready():
 	super()
@@ -183,12 +188,3 @@ func _on_ghost_wait_time_timeout():
 	is_ghost = false
 	$Visuals/Mesh.show()
 	$Visuals/MESH_Ghost.hide()
-
-
-func UpdateNumberHider():
-	_on_UpdateNumberHiderOnline.rpc()
-
-
-@rpc("call_local")
-func _on_UpdateNumberHiderOnline():
-	Globals.NBRPROP -= 1

@@ -9,9 +9,8 @@ extends Node
 @export var IS_SHADER_ON = true
 
 @export var PLAYER_DATA = {}
-@export var ID_CURRENTPLAYER = 0
 
-@export var NBRPROP = 0
+@export var ID_CURRENTPLAYER = 0
 
 @export var FORCE_HIDER_SINGLE_PLAYER = false
 

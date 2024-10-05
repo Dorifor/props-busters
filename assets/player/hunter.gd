@@ -10,11 +10,11 @@ class_name Hunter
 
 @export var cooldown_duration: float = 10.0
 
-@export var Raycast: RayCast3D
+@export var raycast: RayCast3D
 
-@export var InteractLabel: Label
-@export var LifepointLabel: Label
-@export var WaitLabel: Label
+@export var interact_label: Label
+@export var lifepoint_label: Label
+@export var wait_label: Label
 
 var countdown_timer: Timer
 var current_count: int = 0
@@ -42,48 +42,50 @@ func _ready():
 	
 	# Commencer le décompte
 	current_count = int(cooldown_duration)
-	WaitLabel.text = str(current_count)
+	wait_label.text = str(current_count)
 	countdown_timer.start()
 
 # Fonction appelée à chaque tick du Timer
 func _on_countdown_tick():
 	current_count -= 1
-	WaitLabel.text = str(current_count)
+	wait_label.text = str(current_count)
 	
 	if current_count <= 0:
 		countdown_timer.stop()
 		crosshair.visible = false
 		is_locked = false
 		UpdateLifepointText()
-		LifepointLabel.visible = true
+		lifepoint_label.visible = true
 
 func _input(event):
 	super._input(event)
 	if not is_multiplayer_authority(): return
 	
 	if event is InputEventKey and event.is_action_pressed("interact") and isInterract == true:
-		var collider = Raycast.get_collider()
-		if collider and collider.is_class("CharacterBody3D"):
-			print("The RayCast hit a CharacterBody3D!")
+		var collider = raycast.get_collider()
+		if collider and collider is Hider:
+			var hider = collider as Hider
+			hider.rpc("_on_bullet_colliding")
 		else:
 			UpdateLifepoint()
+			
 
 func UpdateLifepoint():
 	lifepoint = lifepoint - 1;
 	UpdateLifepointText()
 
 func UpdateLifepointText():
-	LifepointLabel.text = "lifepoint : " + str(lifepoint)
+	lifepoint_label.text = "lifepoint : " + str(lifepoint)
 
 func _process(delta):
 	super(delta)
 	
-	if Raycast.is_colliding() == true:
-		InteractLabel.visible = true
+	if raycast.is_colliding() == true:
+		interact_label.visible = true
 		isInterract = true
 		
 	else:
-		InteractLabel.visible = false
+		interact_label.visible = false
 		isInterract = false
 		
 	if not is_multiplayer_authority(): return
