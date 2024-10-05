@@ -37,14 +37,18 @@ func _ready():
 
 func add_player(peer_id):
 	if not is_multiplayer_authority(): return
+	Globals.PLAYER_DATA[peer_id]["type"] = "Hunter"
 	var new_player = multiplayer_spawner.spawn({ "peer_id": peer_id, "player_type": Constants.PlayerType.HUNTER_TYPE })
 	player_nodes.append(new_player)
+	Game_Manager.hunters.append(new_player)
 
 
 func add_prop_player(peer_id):
 	if not is_multiplayer_authority(): return
+	Globals.PLAYER_DATA[peer_id]["type"] = "Props"
 	var new_player = multiplayer_spawner.spawn({ "peer_id": peer_id, "player_type": Constants.PlayerType.HIDER_TYPE })
 	player_nodes.append(new_player)
+	Game_Manager.hiders.append(new_player)
 
 
 func _on_player_disconnected(player_peer_id):

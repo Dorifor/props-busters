@@ -7,7 +7,7 @@ class_name Hunter
 @export var animation_player: AnimationPlayer
 @export var crosshair: Control
 
-@export var Raycast: RayCast3D
+@export var raycast: RayCast3D
 
 @export var interact_label: Label
 @export var life_point_label: Label
@@ -26,9 +26,9 @@ func _input(event):
 	super(event)
 	
 	if event is InputEventKey and event.is_action_pressed("interact") and can_interact == true:
-		var collider = Raycast.get_collider()
+		var collider = raycast.get_collider()
 		if collider and collider.is_class("CharacterBody3D"):
-			print("The RayCast hit a CharacterBody3D!")
+			print("The raycast hit a CharacterBody3D!")
 		else:
 			update_life_point()
 
@@ -42,7 +42,7 @@ func update_life_point_text():
 func _process(delta):
 	super(delta)
 	
-	if Raycast.is_colliding() == true:
+	if raycast.is_colliding() == true:
 		interact_label.visible = true
 		can_interact = true
 		

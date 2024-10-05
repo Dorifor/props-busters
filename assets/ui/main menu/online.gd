@@ -24,7 +24,7 @@ const MAX_CONNECTIONS = 20
 
 var players = {}
 
-var player_info = {"name": "Default"}
+var player_info = {"name": "Default", "type": "none"}
 
 var players_loaded = 0
 
@@ -41,7 +41,7 @@ func _on_join_button_pressed(address = "localhost") -> void:
 	if username_input.text == "":
 		return
 	
-	player_info = {"name": username_input.text}
+	player_info = {"name": username_input.text, "type": "none"}
 	menu_panel.hide()
 	lobby_panel.show()
 	start_game_button.hide()
@@ -78,7 +78,7 @@ func _on_join_button_pressed(address = "localhost") -> void:
 func _on_host_button_pressed():
 	if username_input.text == "": return
 	
-	player_info = {"name": username_input.text}
+	player_info = {"name": username_input.text, "type": "none"}
 	menu_panel.hide()
 	lobby_panel.show()
 	var peer = ENetMultiplayerPeer.new()
