@@ -22,21 +22,6 @@ var camera_long_distance = 3
 @export var interact_ui: Control
 @export var ability_progress_bar: TextureProgressBar
 
-@rpc("any_peer", "call_local")
-func _on_bullet_colliding():
-	if is_ghost == false:
-		is_ghost = true
-		transform_into_ghost()
-	else :
-		request_removal_from_game_manager()
-		queue_free()
-	# TODO: Kill the player or smth
-
-func request_removal_from_game_manager():
-	if not is_multiplayer_authority():
-		rpc_id(1, "remove_hider", self.get_instance_id())  
-	else:
-		Game_Manager.remove_hider(self.get_instance_id())
 
 func _ready():
 	super()
@@ -90,6 +75,11 @@ func transform_into_prop():
 	var focused_collision: CollisionShape3D = focused_prop.get_node("Collision")
 	scale = focused_prop.scale
 	position.y = focused_prop.position.y
+	
+	hider_mesh.mesh = focused_mesh.mesh
+	hider_mesh.position.y = focused_mesh.position.y
+	hider_collision.shape = focused_collision.shape
+	hider_collision.position.y = focused_collision.position.y
 
 
 func start_ability_timeout_progress():

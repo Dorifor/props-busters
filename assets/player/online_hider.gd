@@ -22,9 +22,10 @@ func apply_mouse_movement(event):
 	super(event)
 
 func transform_into_prop():
-	super()
 	var focused_mesh: MeshInstance3D = focused_prop.get_node("Mesh")
 	var focused_collision: CollisionShape3D = focused_prop.get_node("Collision")
+	scale = focused_prop.scale
+	position.y = focused_prop.position.y
 	
 	var prop_change_payload = {
 		"mesh": {
@@ -56,3 +57,9 @@ func propagate_prop_change(prop_change_dict):
 	hider_mesh.position.y = prop_change_dict.mesh.y
 	hider_collision.shape = shape
 	hider_collision.position.y = prop_change_dict.collision.y
+
+func request_removal_from_game_manager():
+	if not is_multiplayer_authority():
+		rpc_id(1, "remove_hider", self.get_instance_id())  
+	else:
+		Game_Manager.remove_hider(self.get_instance_id())
