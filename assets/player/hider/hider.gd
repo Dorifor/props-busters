@@ -84,60 +84,25 @@ func apply_mouse_movement(event: InputEvent):
 			camera_mount.rotation_degrees = camera_rotation
 
 
-@rpc("call_local")
-func propagate_prop_change(prop_change_dict):
-#	if multiplayer.get_unique_id() == multiplayer.get_remote_sender_id():
-#		return
-	
-	var mesh = load(prop_change_dict.mesh.path)
-	var shape = load(prop_change_dict.collision.path)
-	
-	hider_mesh.mesh = mesh
-	hider_mesh.position.y = prop_change_dict.mesh.y
-	hider_collision.shape = shape
-	hider_collision.position.y = prop_change_dict.collision.y
-
 
 func transform_into_prop():
-	if not is_multiplayer_authority(): return
-	
 	var focused_mesh: MeshInstance3D = focused_prop.get_node("Mesh")
 	var focused_collision: CollisionShape3D = focused_prop.get_node("Collision")
-#	hider_mesh.mesh = focused_mesh.mesh
-#	hider_mesh.position.y = focused_mesh.position.y
-#	hider_collision.shape = focused_collision.shape
-#	hider_collision.position.y = focused_collision.position.y
 	scale = focused_prop.scale
 	position.y = focused_prop.position.y
-	
-	var prop_change_payload = {
-		"mesh": {
-			"path": focused_mesh.mesh.resource_path,
-			"y": focused_mesh.position.y
-		},
-		"collision": {
-			"path": focused_collision.shape.resource_path,
-			"y": focused_collision.position.y
-		}
-	}
-	
-	propagate_prop_change.rpc(prop_change_payload)
 
 
 func start_ability_timeout_progress():
-	if not is_multiplayer_authority(): return
 	var tween = get_tree().create_tween()
 	tween.tween_property(ability_progress_bar, "value", 0, ability_timer.wait_time)
 
 
 func start_ability_cooldown_progress():
-	if not is_multiplayer_authority(): return
 	var tween = get_tree().create_tween()
 	tween.tween_property(ability_progress_bar, "value", 100, ability_cooldown_timer.wait_time)
 
 
 func activate_power():
-	if not is_multiplayer_authority(): return
 	start_ability_timeout_progress()
 	
 	is_short = true
@@ -149,9 +114,7 @@ func activate_power():
 	ability_timer.start()
 
 
-func disable_power(just_transformed: bool = false):
-	if not is_multiplayer_authority(): return
-	
+func disable_power(just_transformed: bool = false):	
 	if not is_short: return
 	ability_timer.stop()
 	ability_cooldown_timer.start()

@@ -71,7 +71,7 @@ properties/3/replication_mode = 2
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_ycexa")
-raycast = NodePath("Camera Mount/Camera3D/Props Raycast")
+raycast = NodePath("Camera Mount/SpringArm3D/Camera3D/Props Raycast")
 ability_timer = NodePath("Ability Timer")
 ability_cooldown_timer = NodePath("Ability Cooldown")
 hider_mesh = NodePath("Visuals/Mesh")
@@ -81,7 +81,7 @@ interact_ui = NodePath("Hider UI/Interact Label")
 ability_progress_bar = NodePath("Hider UI/Ability Progress Bar")
 rig = NodePath("Visuals")
 camera_mount = NodePath("Camera Mount")
-camera = NodePath("Camera Mount/Camera3D")
+camera = NodePath("Camera Mount/SpringArm3D/Camera3D")
 
 [node name="Hider UI" parent="." instance=ExtResource("3_u67o6")]
 visible = false
@@ -104,16 +104,23 @@ skeleton = NodePath("")
 
 [node name="Camera Mount" type="Node3D" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="Camera Mount"]
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.07875, 1.10113)
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera Mount"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.4, -0.124848)
+collision_mask = 17
+spring_length = 1.3
+margin = 0.1
 
-[node name="Props Raycast" type="RayCast3D" parent="Camera Mount/Camera3D" node_paths=PackedStringArray("excluded_colliders")]
+[node name="Camera3D" type="Camera3D" parent="Camera Mount/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0.0372497, 1.29298)
+fov = 60.0
+
+[node name="Props Raycast" type="RayCast3D" parent="Camera Mount/SpringArm3D/Camera3D" node_paths=PackedStringArray("excluded_colliders")]
 transform = Transform3D(1, 0, 0, 0, -2.98023e-08, -1, 0, 1, -2.98023e-08, 0, 0, 0)
 target_position = Vector3(0, -3.5, 0)
 collision_mask = 4
 debug_shape_custom_color = Color(1, 0, 0, 0.00392157)
 script = ExtResource("2_ucxxu")
-excluded_colliders = [NodePath("../../..")]
+excluded_colliders = [NodePath("../../../..")]
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.254186, 0)

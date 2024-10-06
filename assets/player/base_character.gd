@@ -23,7 +23,8 @@ var base_position: Vector3
 func _ready():
 	camera.current = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	pause_menu = get_tree().get_root().get_node("Main Scene/Pause Menu")
+	if not pause_menu:
+		pause_menu = get_tree().get_root().get_node("Main Scene/Pause Menu")
 
 
 func _input(event):
@@ -90,9 +91,9 @@ func apply_mouse_movement(event: InputEvent):
 
 
 func pause():
+	pause_menu.show()
 	Globals.IS_GAME_PAUSED = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	pause_menu.visible = true
 
 
 func _to_string() -> String:
