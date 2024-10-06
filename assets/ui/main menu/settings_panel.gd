@@ -15,7 +15,7 @@ func _ready() -> void:
 	shader_toggle.set_pressed_no_signal(Globals.IS_SHADER_ON)
 	
 	screen_resolution_options.select(Globals.SELECTED_RESOLUTION_INDEX)
-	shader.visible = Globals.IS_SHADER_ON
+	if shader: shader.visible = Globals.IS_SHADER_ON
 	volume_slider.value = Globals.VOLUME_VALUE
 
 
@@ -25,7 +25,7 @@ func _on_button_pressed() -> void:
 
 func _on_volume_slider_value_changed(value: float) -> void:
 	Globals.VOLUME_VALUE = value
-	music_player.volume_db = value
+	if music_player: music_player.volume_db = value
 
 
 func _on_fullscreen_check_button_toggled(button_pressed: bool) -> void:

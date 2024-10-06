@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccnh5lh3cl6iv"]
+[gd_scene load_steps=8 format=3 uid="uid://ccnh5lh3cl6iv"]
 
 [ext_resource type="PackedScene" uid="uid://dj26sacnhty4r" path="res://addons/devblocks/blocks/basic_block.tscn" id="1_i1swa"]
 [ext_resource type="PackedScene" uid="uid://camvcri7e11vi" path="res://addons/devblocks/blocks/colored_block.tscn" id="2_35nfj"]
-[ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/hunter.tscn" id="3_c52k3"]
+[ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="3_o34se"]
+[ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_rrn25"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2lfmn"]
 sky_top_color = Color(0.540498, 0.762629, 0.927717, 1)
@@ -61,6 +62,9 @@ block_color_group = 5
 transform = Transform3D(1.78191, 0, -2.54558, 0, 2.106, 0, 1.78191, 0, 2.54558, 5.24148, 1.553, 12.2077)
 block_color_group = 4
 
-[node name="Hunter" parent="." instance=ExtResource("3_c52k3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.507891, 10)
-jump_velocity = 5.0
+[node name="Pause Menu" parent="." instance=ExtResource("3_rrn25")]
+visible = false
+
+[node name="Hider" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("3_o34se")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7837, 0.495814, 2.96118)
+pause_menu = NodePath("../Pause Menu")

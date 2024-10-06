@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Props Busters"
-run/main_scene="res://assets/ui/main menu/main_menu.tscn"
+run/main_scene="res://assets/temporary/map_blockout.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 config/icon="res://assets/icon.svg"

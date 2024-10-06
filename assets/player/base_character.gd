@@ -11,40 +11,24 @@ class_name BaseCharacter
 @export var camera: Camera3D
 
 @export var pause_menu: Control
+@export var cam_horizontal_min: int = -60
+@export var cam_horizontal_max: int = 60
 
 var rotation_locked = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var base_position: Vector3
 
-var player_list: PlayerListMenu
-
-func _enter_tree():
-	set_multiplayer_authority(str(name).to_int())
-
 
 func _ready():
-	if not is_multiplayer_authority(): return
 	camera.current = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	pause_menu = get_tree().get_root().get_node("Main Scene/Pause Menu")
-	
-	player_list = GlobalRessources.player_list_scene.instantiate()
-	add_child(player_list)
-	player_list.visible = false
+	if not pause_menu:
+		pause_menu = get_tree().get_root().get_node("Main Scene/Pause Menu")
 
 
 func _input(event):
-	if not is_multiplayer_authority(): return
 	if Globals.IS_GAME_PAUSED: return
-	
-	if Input.is_action_just_pressed("tab"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		player_list.show()
-	if Input.is_action_just_released("tab"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		player_list.hide()
-		player_list.kick_confirmation_popup.hide()
 	
 	apply_mouse_movement(event)
 		
@@ -53,12 +37,10 @@ func _input(event):
 
 
 func _process(_delta):
-	if not is_multiplayer_authority():
-		return
+	pass
 
 
 func _physics_process(delta):
-	if not is_multiplayer_authority(): return
 	if Globals.IS_GAME_PAUSED: return
 	
 	var speed: float
@@ -94,8 +76,9 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+
 func apply_mouse_movement(event: InputEvent):
-	if event is InputEventMouseMotion and !player_list.visible:
+	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * Globals.HORIZONTAL_SENSIBILITY_VALUE))
 		
 		#if !rotation_locked:
@@ -103,15 +86,14 @@ func apply_mouse_movement(event: InputEvent):
 		
 		camera_mount.rotate_x((deg_to_rad(-event.relative.y * Globals.VERTICAL_SENSIBILITY_VALUE)))
 		var camera_rotation = camera_mount.rotation_degrees
-		camera_rotation.x = clamp(camera_rotation.x, -30, 30)
+		camera_rotation.x = clamp(camera_rotation.x, cam_horizontal_min, cam_horizontal_max)
 		camera_mount.rotation_degrees = camera_rotation
 
+
 func pause():
-	if not is_multiplayer_authority(): return
-	
+	pause_menu.show()
 	Globals.IS_GAME_PAUSED = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	pause_menu.visible = true
 
 
 func _to_string() -> String:
