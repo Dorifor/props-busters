@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccnh5lh3cl6iv"]
+[gd_scene load_steps=9 format=3 uid="uid://ccnh5lh3cl6iv"]
 
 [ext_resource type="PackedScene" uid="uid://dj26sacnhty4r" path="res://addons/devblocks/blocks/basic_block.tscn" id="1_i1swa"]
 [ext_resource type="PackedScene" uid="uid://camvcri7e11vi" path="res://addons/devblocks/blocks/colored_block.tscn" id="2_35nfj"]
 [ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="3_o34se"]
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_rrn25"]
+[ext_resource type="PackedScene" uid="uid://dster8131gnji" path="res://assets/props/fire_hydrant.tscn" id="5_x471g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2lfmn"]
 sky_top_color = Color(0.540498, 0.762629, 0.927717, 1)
@@ -38,6 +39,18 @@ transform = Transform3D(-23.04, -8.74228e-08, 0, 2.01422e-06, -1, 0, 0, 0, 16, -
 transform = Transform3D(2, 0, 0, 0, 0.4, 0, 0, 0, 8, 6.2, 0.699999, -4.1)
 block_color_group = 3
 
+[node name="ColoredBlock 8" parent="." instance=ExtResource("2_35nfj")]
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 0.8, -8.12717, -0.100001, -5.7)
+block_color_group = 3
+
+[node name="ColoredBlock 9" parent="." instance=ExtResource("2_35nfj")]
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 0.8, -9.12717, -0.100001, -4.1)
+block_color_group = 3
+
+[node name="ColoredBlock 10" parent="." instance=ExtResource("2_35nfj")]
+transform = Transform3D(1, 0, 0, 0, 0.4, 0, 0, 0, 0.8, -8.12717, -0.100001, -1.7)
+block_color_group = 3
+
 [node name="ColoredBlock 3" parent="." instance=ExtResource("2_35nfj")]
 transform = Transform3D(9.79, 0, 0, 0, 0.2, 0, 0, 0, 6.8, -6.89, 0.599999, 6.38)
 block_color_group = 1
@@ -68,3 +81,6 @@ visible = false
 [node name="Hider" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("3_o34se")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7837, 0.495814, 2.96118)
 pause_menu = NodePath("../Pause Menu")
+
+[node name="Fire Hydrant" parent="." instance=ExtResource("5_x471g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12932, 0.4555, 1.74849)
